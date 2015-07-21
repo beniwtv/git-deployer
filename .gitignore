@@ -1,3 +1,4 @@
 vendor/
 .codio
 startup.sh
+git-deployer.phar
