@@ -1,0 +1,705 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"quote",
+				"quoteFiles"
+			],
+			[
+				"qi",
+				"quoteFiles  (variable)"
+			],
+			[
+				"quo",
+				"quoteInfo"
+			],
+			[
+				"get",
+				"getFile"
+			],
+			[
+				"json",
+				"jsonresponse"
+			],
+			[
+				"delet",
+				"deletedFile"
+			],
+			[
+				"sess",
+				"sessionfile"
+			],
+			[
+				"dele",
+				"deletedFile"
+			],
+			[
+				"jsn",
+				"jsonresponse"
+			],
+			[
+				"add",
+				"addFile"
+			],
+			[
+				"q",
+				"quote"
+			],
+			[
+				"par",
+				"params"
+			],
+			[
+				"defe",
+				"deferred"
+			],
+			[
+				"lan",
+				"languageTo"
+			],
+			[
+				"languag",
+				"languageFrom"
+			],
+			[
+				"des",
+				"description"
+			],
+			[
+				"order",
+				"order"
+			],
+			[
+				"pre",
+				"previousPage"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"ale",
+				"alertIdx"
+			],
+			[
+				"da",
+				"$rootScope.dataStorage.alerts"
+			],
+			[
+				"$ro",
+				"$rootScope"
+			],
+			[
+				"data",
+				"dataStorageService"
+			],
+			[
+				"$roo",
+				"$rootScope"
+			],
+			[
+				"raes",
+				"ratesRightTable"
+			],
+			[
+				"rates",
+				"ratesLeftTable"
+			],
+			[
+				"ratesLe",
+				"ratesLeftTable"
+			],
+			[
+				"rat",
+				"ratesLength"
+			],
+			[
+				"ap",
+				"apiUrl"
+			],
+			[
+				"con",
+				"configs"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"app",
+				"appConfig"
+			],
+			[
+				"s",
+				"script"
+			],
+			[
+				"jq",
+				"jquery-file-upload"
+			],
+			[
+				"com",
+				"components"
+			],
+			[
+				"fi",
+				"fieldset	<fieldset>"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"pa",
+				"padding-left"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"b",
+				"br	<br>"
+			],
+			[
+				"cookie",
+				"cookiecuttr"
+			],
+			[
+				"blo",
+				"block"
+			],
+			[
+				"j",
+				"jquery"
+			],
+			[
+				"bu",
+				"bundles"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"scr",
+				"scrollTop"
+			],
+			[
+				"se",
+				"section	Tag"
+			],
+			[
+				"temp",
+				"templateHeaders"
+			],
+			[
+				"news",
+				"newsletterSchema"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 243.0,
+		"last_filter": "status",
+		"selected_items":
+		[
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"conso",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"ssja",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read()) ",
+			" import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read()) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src"
+	],
+	"file_history":
+	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/services.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/bower/bower.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/DependencyInjection/AppExtension.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/DependencyInjection/Configuration.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/routing.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Service/OAuthRequest.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/config.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/config_dev.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/parameters.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Controller/PagesController.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Controller/AjaxController.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/AppBundle.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/AppKernel.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/config.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/config_dev.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/routing.yml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/parameters.yml.dist",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/app/Resources/views/base.html.twig",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/etc/git-deployer-nginx",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/index.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/conf/vhost.conf.erb",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/conf/nginx.conf",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/conf/php.ini",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/AppKernel.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/.gitignore",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/symfony/monolog-bundle/Symfony/Bundle/MonologBundle/Tests/DependencyInjection/Fixtures/xml/overwriting_import.xml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/modernizr/feature-detects/img-webp.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/css/bootstrap.css",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/js/translaciaweb-services.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/js/translaciaweb-controllers.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Controller/AjaxController.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Quote/customeremail.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/config.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/parameters.yml.dist",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/parameters.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Quote/agentemail.txt.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js/jquery.fileupload-ui.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js/jquery.fileupload-audio.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js/jquery.fileupload-angular.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Controller/PagesController.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Entity/QuoteInfo.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/css/style-override.css",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/js/translaciaweb.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/.hgignore",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/composer.json",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/routing.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/config_dev.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/Resources/views/base.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/modernizr/test/caniuse_files/ga.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angulartics/samples/google-analytics.html",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/cache/dev/sp_bower/bower.json",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sp/bower-bundle/Sp/BowerBundle/composer.json",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/xml/orm_service_multiple_entity_managers.xml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/xml/orm_single_em_bundle_mappings.xml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/bootstrap-scrollspy.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/Resources/node_modules/uglify-js/tools/node.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/js/translaciaweb-filters.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/DependencyInjection/WWBSTranslaciaSiteExtension.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/config_dev.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/DependencyInjection/Configuration.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/config.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angTerms.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angPrivacy.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/css/style.css",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/layout.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/bower.json",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/angular.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb-controllers.js",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/etc/translacia",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/css/style.css",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/css/font-awesome.css",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/routing_dev.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/routing.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/master.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/layout_pages.html.twig",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Tests/Controller/DefaultControllerTest.php",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/security.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/Acme/DemoBundle/Resources/config/routing.yml",
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/git-deployer.sublime-project",
+		"/home/beniwtv/Documents/CodeRepos/apiserver/apiserver.sublime-project",
+		"/home/beniwtv/Documents/Projects/translacia.com/translacia.sublime-project",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/ang-privacy.tpl",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/ang-index.tpl",
+		"/home/beniwtv/Documents/Projects/translacia.com/SCROLL&STRAP/index.html",
+		"/home/beniwtv/Documents/Projects/translacia.com/OLDHS",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/master.tpl",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciawebcontrollers.js",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/functions.js",
+		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciaweb.js",
+		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-04.csv",
+		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-03.csv",
+		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-02.csv",
+		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-01.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-31.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-30.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-28.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-26.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-25.csv",
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-24.csv",
+		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/jquery.cookiecuttr.min.js",
+		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/jquery.cookie.min.js",
+		"/home/beniwtv/Documents/Projects/crowddev.io/src/styles/cookiecuttr.css",
+		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/crowddevweb.js",
+		"/home/beniwtv/Documents/Projects/crowddev.io/crowddev.sublime-project",
+		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/main.js",
+		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/endpoints/newsletters.js",
+		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/config.js",
+		"/home/beniwtv/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/beniwtv/.config/sublime-text-3/Packages/User/Clientside.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"url",
+			"spinner",
+			"alert",
+			"spinner",
+			"Loading",
+			"spin",
+			"                    \n",
+			"4",
+			"open",
+			"order",
+			"ga.js",
+			"icon",
+			"tarifas",
+			"}]\n",
+			"span5",
+			"ng-",
+			"solici",
+			">   ",
+			"privacy",
+			"icon-large",
+			"fa-icon",
+			"<!-- END FEATURE ITEM-->",
+			"<!-- FEATURE ITEM-->",
+			"typogra",
+			"<!-- FEATURE ITEM-->",
+			"<!-- END FEATURE ITEM-->",
+			"docum",
+			"img",
+			"{% block stylesheets %}\n    {% stylesheets 'bundles/acme_foo/css/*' filter='cssrewrite' %}\n        <link rel=\"stylesheet\" href=\"{{ asset_url }}\" />\n    {% endstylesheets %}\n{% endblock %}",
+			"\".\"",
+			"gobot",
+			"  \n",
+			"href",
+			"            <!--",
+			"assets",
+			"images",
+			"img",
+			"google",
+			"analytics",
+			"analytis",
+			"//\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"icon-4x",
+			"icon",
+			""
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 128.0
+	},
+	"pinned_build_system": "",
+	"project": "git-deployer.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"bower",
+				"src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json"
+			],
+			[
+				"bower.js",
+				"src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json"
+			],
+			[
+				"bow",
+				"src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json"
+			],
+			[
+				"bower.json",
+				"src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json"
+			],
+			[
+				"index.html.tw",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/index.html.twig"
+			],
+			[
+				"bower.",
+				"src/WWBS/Translacia/SiteBundle/Resources/config/bower/bower.json"
+			],
+			[
+				"ang",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig"
+			],
+			[
+				"styl",
+				"src/WWBS/Translacia/SiteBundle/Resources/public/css/style.css"
+			],
+			[
+				"lay",
+				"vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/layout.html.twig"
+			],
+			[
+				"angin",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig"
+			],
+			[
+				"angte",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angTerms.html.twig"
+			],
+			[
+				"style.css",
+				"src/WWBS/Translacia/SiteBundle/Resources/public/css/style.css"
+			],
+			[
+				"angp",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angPrivacy.html.twig"
+			],
+			[
+				"angular",
+				"web/bundles/wwbstranslaciasite/components/angular/angular.js"
+			],
+			[
+				"anginm",
+				"src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig"
+			],
+			[
+				"config.ym",
+				"app/config/config.yml"
+			],
+			[
+				"controllers",
+				"web/bundles/wwbstranslaciasite/js/translaciaweb-controllers.js"
+			],
+			[
+				"translacia",
+				"web/bundles/wwbstranslaciasite/js/translaciaweb.js"
+			],
+			[
+				"bootstrap",
+				"web/bundles/wwbstranslaciasite/css/bootstrap.css"
+			],
+			[
+				"style",
+				"web/bundles/wwbstranslaciasite/css/style.css"
+			],
+			[
+				"fonta",
+				"web/bundles/wwbstranslaciasite/css/font-awesome.css"
+			],
+			[
+				"config_de",
+				"app/config/config_dev.yml"
+			],
+			[
+				"routing",
+				"app/config/routing.yml"
+			],
+			[
+				"appk",
+				"app/AppKernel.php"
+			],
+			[
+				"routing.",
+				"src/Acme/DemoBundle/Resources/config/routing.yml"
+			],
+			[
+				"func",
+				"scripts/functions.js"
+			],
+			[
+				"trnals",
+				"scripts/translaciaweb.js"
+			],
+			[
+				"trans",
+				"scripts/translaciawebcontrollers.js"
+			],
+			[
+				"tran",
+				"scripts/translaciaweb.js"
+			],
+			[
+				"mas",
+				"src/templates/master.tpl"
+			],
+			[
+				"crow",
+				"src/scripts/crowddevweb.js"
+			],
+			[
+				"con",
+				"config.js"
+			],
+			[
+				"mai",
+				"main.js"
+			],
+			[
+				"news",
+				"endpoints/newsletters.js"
+			],
+			[
+				"conf",
+				"config.js"
+			],
+			[
+				"new",
+				"endpoints/newsletters.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 359.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

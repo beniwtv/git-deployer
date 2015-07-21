@@ -1,0 +1,14 @@
+{
+    "name": "git-deployer",
+    "license": "MIT",
+    "type": "project",
+    "description": "Deploys projects from Git, via configurable plugins.",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.5",
+        "symfony/console": "2.7.*"        
+    },
+    "minimum-stability": "stable"   
+}
