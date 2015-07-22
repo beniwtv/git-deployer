@@ -8,7 +8,9 @@
     },
     "require": {
         "php": ">=5.5",
-        "symfony/console": "2.7.*"        
+        "symfony/console": "2.7.*",
+        "dnoegel/php-xdg-base-dir": "^0.1.0",
+        "guzzlehttp/guzzle": "~6.0"        
     },
     "minimum-stability": "stable"   
 }
