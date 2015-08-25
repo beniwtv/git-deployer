@@ -35,6 +35,13 @@ git-deployer login <service>
 ```
 
 The service may ask you a few questions, like the log-in user and password.
+After you have logged in, execute the config command, which will guide you through
+the configuration for the rest of Git-Deployer:
+
+```
+git-deployer config
+```
+
 Now, see git-deployer -h for more commands!
 
 [1]: https://github.com/git-deployer
