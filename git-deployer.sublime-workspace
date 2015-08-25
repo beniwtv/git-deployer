@@ -4,6 +4,98 @@
 		"selected_items":
 		[
 			[
+				"pro",
+				"$project〔variable〕"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"fun",
+				"function〔keyword〕"
+			],
+			[
+				"array_m",
+				"array_merge〔function〕"
+			],
+			[
+				"more",
+				"$moreProjects〔variable〕"
+			],
+			[
+				"ma",
+				"matches"
+			],
+			[
+				"js",
+				"json_decode"
+			],
+			[
+				"prin",
+				"print_r〔function〕"
+			],
+			[
+				"pri",
+				"print_r"
+			],
+			[
+				"pr",
+				"print_r"
+			],
+			[
+				"json",
+				"json_decode〔function〕"
+			],
+			[
+				"ins",
+				"$instance〔variable〕"
+			],
+			[
+				"hel",
+				"$helpers〔variable〕"
+			],
+			[
+				"serv",
+				"$servClass〔variable〕"
+			],
+			[
+				"Helper",
+				"HelperSet"
+			],
+			[
+				"thr",
+				"throw〔keyword〕"
+			],
+			[
+				"me",
+				"$method〔variable〕"
+			],
+			[
+				"var",
+				"var_dump〔function〕"
+			],
+			[
+				"prop",
+				"property_exists〔function〕"
+			],
+			[
+				"save",
+				"$saveFile〔variable〕"
+			],
+			[
+				"se",
+				"$service〔variable〕"
+			],
+			[
+				"av",
+				"$availableServices〔variable〕"
+			],
+			[
+				"imp",
+				"implode〔function〕"
+			],
+			[
 				"quote",
 				"quoteFiles"
 			],
@@ -18,10 +110,6 @@
 			[
 				"get",
 				"getFile"
-			],
-			[
-				"json",
-				"jsonresponse"
 			],
 			[
 				"delet",
@@ -128,10 +216,6 @@
 				"configs"
 			],
 			[
-				"fun",
-				"function"
-			],
-			[
 				"app",
 				"appConfig"
 			],
@@ -192,10 +276,6 @@
 				"scrollTop"
 			],
 			[
-				"se",
-				"section	Tag"
-			],
-			[
 				"temp",
 				"templateHeaders"
 			],
@@ -207,6 +287,62 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/GitDeployer/Objects/Project.php",
+			"settings":
+			{
+				"buffer_size": 438,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/Services/GitHubService.php",
+			"settings":
+			{
+				"buffer_size": 6821,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/Services/GitLabService.php",
+			"settings":
+			{
+				"buffer_size": 7209,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/Commands/StatusCommand.php",
+			"settings":
+			{
+				"buffer_size": 1503,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/AppInstance.php",
+			"settings":
+			{
+				"buffer_size": 2584,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/Storage/LocalStorage.php",
+			"settings":
+			{
+				"buffer_size": 80,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GitDeployer/Storage/BaseStorage.php",
+			"settings":
+			{
+				"buffer_size": 59,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -215,13 +351,37 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 243.0,
-		"last_filter": "status",
+		"height": 369.0,
+		"last_filter": "sftp",
 		"selected_items":
 		[
 			[
+				"sftp",
+				"SFTP: Browse Server…"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
 				"status",
 				"Git: Status"
+			],
+			[
+				"tag",
+				"Git: Add Tag"
+			],
+			[
+				"mer",
+				"Git: Mergetool"
+			],
+			[
+				"commt",
+				"Git: Commit"
 			],
 			[
 				"stat",
@@ -248,7 +408,7 @@
 				"Set Syntax: JavaScript"
 			]
 		],
-		"width": 530.0
+		"width": 593.0
 	},
 	"console":
 	{
@@ -271,10 +431,46 @@
 	"expanded_folders":
 	[
 		"/home/beniwtv/ownCloud/Projects/git-deployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src"
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage"
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/BaseObject.php",
+		"/tmp/sublime-sftp-browse-1437577457/web2.apac.globalroaming.com/var/www/secure/css/style.css",
+		"/tmp/sublime-sftp-browse-1437577236/web2.apac.globalroaming.com/var/www/secure/tplv3/ajax/home.tpl",
+		"/tmp/sublime-sftp-browse-1437576461/web2.apac.globalroaming.com/var/www/secure/tplv3/ajax/home.tpl",
+		"/tmp/sublime-sftp-browse-1437576515/web2.apac.globalroaming.com/var/www/secure/index.php",
+		"/tmp/sublime-sftp-browse-1437576654/web2.apac.globalroaming.com/var/www/secure/vp.php",
+		"/tmp/sublime-sftp-browse-1437576585/web2.apac.globalroaming.com/var/www/secure/i.php",
+		"/tmp/sublime-sftp-browse-1437575169/web2.apac.globalroaming.com/var/www/secure/eurail/assets/js/signup.js",
+		"/tmp/sublime-sftp-browse-1437574742/web2.apac.globalroaming.com/var/www/secure/eurail/signup.html",
+		"/tmp/sublime-sftp-browse-1437576399/web2.apac.globalroaming.com/var/www/secure/welcome.php",
+		"/tmp/sublime-sftp-browse-1437576244/web2.apac.globalroaming.com/var/www/secure/index.php",
+		"/tmp/sublime-sftp-browse-1437574119/web2.apac.globalroaming.com/var/www/secure/eurail/thank-you.html",
+		"/tmp/sublime-sftp-browse-1437571108/web2.apac.globalroaming.com/var/www/secure/eurail/signup.html",
+		"/tmp/sublime-sftp-browse-1437571748/web2.apac.globalroaming.com/var/www/secure/eurail/assets/js/signup.js",
+		"/tmp/sublime-sftp-browse-1437572540/web2.apac.globalroaming.com/var/www/secure/eurail/class/ip2location.class.php",
+		"/tmp/sublime-sftp-browse-1437571799/web2.apac.globalroaming.com/var/www/secure/eurail/backend.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE.orig",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/VersionCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/services.yml",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/bower/bower.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/DependencyInjection/AppExtension.php",
@@ -284,7 +480,6 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/config.yml",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/config_dev.yml",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/app/config/parameters.yml",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Controller/PagesController.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Controller/AjaxController.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/AppBundle.php",
@@ -372,22 +567,7 @@
 		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-03.csv",
 		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-02.csv",
 		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-01.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-31.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-30.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-28.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-26.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-25.csv",
-		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-24.csv",
-		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/jquery.cookiecuttr.min.js",
-		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/jquery.cookie.min.js",
-		"/home/beniwtv/Documents/Projects/crowddev.io/src/styles/cookiecuttr.css",
-		"/home/beniwtv/Documents/Projects/crowddev.io/src/scripts/crowddevweb.js",
-		"/home/beniwtv/Documents/Projects/crowddev.io/crowddev.sublime-project",
-		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/main.js",
-		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/endpoints/newsletters.js",
-		"/run/user/beniwtv/gvfs/sftp:host=node2.wwbs-online.net,user=nodejs/home/nodejs/Apps/crowddevio/config.js",
-		"/home/beniwtv/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/beniwtv/.config/sublime-text-3/Packages/User/Clientside.sublime-settings"
+		"/home/beniwtv/Downloads/2013-07/Format2/2013-07-31.csv"
 	],
 	"find":
 	{
@@ -406,6 +586,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"delivery aaddress",
+			"\"na\"",
+			"\n        ",
+			"401",
+			"application",
+			"_getServices",
+			"available",
 			"url",
 			"spinner",
 			"alert",
@@ -458,7 +645,7 @@
 			"icon",
 			""
 		],
-		"reverse": true,
+		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -467,8 +654,234 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/GitDeployer/Objects/Project.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								414,
+								414
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/GitDeployer/Services/GitHubService.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6821,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5160,
+								5160
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 482.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/GitDeployer/Services/GitLabService.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2144,
+								2144
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 968.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/GitDeployer/Commands/StatusCommand.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1503,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								980,
+								980
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/GitDeployer/AppInstance.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2584,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								375,
+								375
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/GitDeployer/Storage/LocalStorage.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 80,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/GitDeployer/Storage/BaseStorage.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 59,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								59,
+								59
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -506,6 +919,18 @@
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.git-commit":
+	{
+		"height": 118.0
+	},
+	"output.git-custom":
+	{
+		"height": 118.0
+	},
+	"output.git-push":
+	{
+		"height": 118.0
 	},
 	"output.sftp":
 	{

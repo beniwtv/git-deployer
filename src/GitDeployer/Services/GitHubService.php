@@ -54,6 +54,14 @@ class GitHubService extends BaseService {
 
     }
 
+    /**
+     * Get a list of projects from GitHub
+     * @return array of \Git-Deployer\Objects\Project
+     */
+    public function getProjects() {
+
+    }
+
     //////////////////////////////////////////////////////////////////
     // Helpers
     //////////////////////////////////////////////////////////////////
@@ -93,7 +101,7 @@ class GitHubService extends BaseService {
 
         // -> Display some help on how to create a private access key
         $this->output->writeln(<<<HELP
-<info>You MUST create a personal access token for Git-deployer before you
+<info>You MUST create a personal access token for Git-Deployer before you
 are able to log-in to GitHub. To do this, follow the instructions on 
 the following page:
 </info>

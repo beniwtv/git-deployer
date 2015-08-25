@@ -59,6 +59,53 @@ class GitLabService extends BaseService {
 
     }
 
+    /**
+     * Get a list of projects from GitLab
+     * @return array of \Git-Deployer\Objects\Project
+     */
+    public function getProjects($url = 'projects') {
+
+        if (strlen($this->privateKey) > 0) {
+            $client = $this->_createClient($this->privateKey);
+
+            try {
+                $response = $client->get($url);
+                $projects = json_decode($response->getBody());
+
+                $projects = array_map( function ($p) {
+                    $project = new \GitDeployer\Objects\Project();
+                    $project->name($p->name)
+                            ->description($p->description)
+                            ->url($p->http_url_to_repo);
+
+                    return $project;
+                }, $projects);
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+                    
+                    preg_match('/<.*projects(.*)>; rel="next"/', $link, $matches);
+                    
+                    if (isset($matches[1])) {
+                        $cleanLink = 'projects' . $matches[1];
+
+                        $moreProjects = $this->getProjects($cleanLink);
+                        if (is_array($moreProjects)) $projects = array_merge($projects, $moreProjects);
+                    }
+                }
+
+                return $projects;
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
+
+    }
+
     //////////////////////////////////////////////////////////////////
     // Helpers
     //////////////////////////////////////////////////////////////////
