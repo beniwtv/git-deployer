@@ -9,9 +9,6 @@ class LogoutCommand extends Command {
     
     protected function configure() {
 
-        // Get available services to display to the user
-        $services = \GitDeployer\Services\BaseService::getServicesForHelp();
-
         $this
             ->setName('logout')
             ->setDescription('Log out of the Git service (if logged in)');
@@ -29,7 +26,7 @@ class LogoutCommand extends Command {
             // No app instance? We're done here.
         }
 
-        $output->writeln('You have successfully logged out</info>');
+        $output->writeln('You have successfully logged out!');
 
     }
 

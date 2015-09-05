@@ -5,33 +5,19 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class ConfigCommand extends Command {
     
-    protected function configure() {
+    protected function configure() {       
 
-        // Get available services to display to the user
-        $services = \GitDeployer\Services\BaseService::getServicesForHelp();
-
+        // -> Intro
         $this
-            ->setName('login')
-            ->setDescription('Login to a Git service')
-            ->addArgument(
-                'service',
-                InputArgument::REQUIRED,
-                'Which service do you want to use?'
-            )
+            ->setName('config')
+            ->setDescription('Configure Git-Deployer')           
             ->setHelp(
               <<<HELP
- The <info>%command.name%</info> command allows you to log-in to a Git service like
- GitLab, GitHub, etc... The following <info>services</info> exist in this build:
-
- <comment>$services</comment>
-
- Once you know which provider you would like to use, simply execute 
- the <info>%command.name%</info> command as follows: 
-
-    ./git-deployer <info>%command.name%</info> <service>
+ The <info>%command.name%</info> command allows you to configure Git-Deployer.
 HELP
             );
 
@@ -39,32 +25,53 @@ HELP
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         
-        $service = $input->getArgument('service');
+        $output->writeln(
+            <<<INTRO
+Welcome to the configuration wizard for Git-Deployer!
+Let's get started!
 
-        // -> We check if there is already an app instance, and use that
-        // if it exists to log-in or pre-populate data
-        try {
-            $instance = \GitDeployer\AppInstance::getInstance();
-            $appService = $instance->service();
-            $appService->setInstances($input, $output, $this->getHelperSet());
-        } catch(\Exception $e) {
-            $instance = new \GitDeployer\AppInstance();
+INTRO
+        );
 
-            // -> We first create a new instance of the service, and let it
-            // configure itself (it may ask questions, etc...)
-            $appService = \GitDeployer\Services\BaseService::createServiceInstance($service, $input, $output, $this->getHelperSet());
-        }
+        // -> Storage service
+        
+        // Get available storage services to display to the user
+        $services = \GitDeployer\Storage\BaseStorage::getStorageServicesForHelp();
 
-        $appService->login();
+        $output->writeln(
+            <<<INTRO
+First, you will need to configure a <info>storage service</info>:
 
-        // -> Once the configuration goes through (no exception thrown), we
-        // can save the service to the AppInstance, and save it to the file system        
-        $instance->service($appService)
-                 ->save();       
+        A <info>storage service</info> is responsible of storing Git-Deployer's state,
+    ❓   such as what repositories are deployed, which version/tag was deployed, where
+        they are deployed, etc...
 
-        $output->writeln('You have successfully logged in to <info>' . $service . '</info>');
-        $output->writeln('Don\'t forget to configure your Git-Deployer instance by executing the <info>config</info> command!');
+The following <info>storage services</info> exist in this build:
 
+<comment>$services</comment>
+INTRO
+        );
+
+        $services = \GitDeployer\Storage\BaseStorage::getStorageServicesForIterating();
+        $helper = $this->getHelper('question');
+        
+        // -> Get storage service to use
+        $question = new ChoiceQuestion('Which storage service would you like to use?', $services);
+        $question->setValidator(function ($answer) use($services) {
+            if (!isset($services[$answer])) {
+                throw new \RuntimeException(
+                    'Please select a correct value!'
+                );
+            }
+
+            return $answer;
+        });
+
+        $number = $helper->ask($input, $output, $question);
+        $storageService = \GitDeployer\Storage\BaseStorage::createServiceInstance($services[$number], $input, $output, $this->getHelperSet());
+        $storageService->configure();
+        
+        print_r($storageService);
     }
 
 }
