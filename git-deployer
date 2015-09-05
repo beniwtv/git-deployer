@@ -6,6 +6,7 @@ require __DIR__.'/vendor/autoload.php';
 use GitDeployer\Commands\LoginCommand;
 use GitDeployer\Commands\LogoutCommand;
 use GitDeployer\Commands\StatusCommand;
+use GitDeployer\Commands\ConfigCommand;
 
 use Symfony\Component\Console\Application;
 
@@ -13,5 +14,6 @@ use Symfony\Component\Console\Application;
 $deployer = new Application('Git-Deployer', '@package_version@');
 $deployer->add(new LoginCommand());
 $deployer->add(new LogoutCommand());
+$deployer->add(new ConfigCommand());
 $deployer->add(new StatusCommand());
 $deployer->run();

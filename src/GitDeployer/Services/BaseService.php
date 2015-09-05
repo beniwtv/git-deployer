@@ -45,10 +45,10 @@ class BaseService {
      * Gets the available Git services for the login command help
      * @return string
      */
-    static function getServicesForHelp() {
+    static function getVCSServicesForHelp() {
 
         // -> Get available services from services directory
-        $services = self::_getServices();
+        $services = self::_getVCServices();
 
         // -> Print in a human-readable way
         return implode("\n ", array_filter($services));
@@ -66,10 +66,10 @@ class BaseService {
      */
     static function createServiceInstance($service, InputInterface $input, OutputInterface $output, HelperSet $helpers) {
 
-        $availableServices = self::_getServices();
+        $availableServices = self::_getVCServices();
 
         if (!in_array($service, $availableServices))
-            throw new \Exception('This service does not exist! See "help login" for services.');
+            throw new \Exception('This VCS service does not exist! See "help login" for services.');
 
         $className = __NAMESPACE__ . '\\' . $service . 'Service';
 
@@ -100,7 +100,7 @@ class BaseService {
      * Gets available services from the services directory
      * @return array
      */
-    private static function _getServices() {
+    private static function _getVCServices() {
 
         $services = scandir(__DIR__);        
         $services = array_map(function($m) {
