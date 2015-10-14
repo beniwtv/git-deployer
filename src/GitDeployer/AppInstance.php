@@ -11,6 +11,13 @@ class AppInstance implements \Serializable {
     protected $service;
 
     /**
+     * The currently used storage service
+     * in this application
+     * @var Storage\BaseStorage
+     */
+    protected $storage;
+
+    /**
      * Re-creates this class from the file
      * found in the XDG directory
      * @return AppInstance
@@ -69,7 +76,8 @@ class AppInstance implements \Serializable {
     public function serialize() {
 
         return serialize(array(
-            $this->service
+            $this->service,
+            $this->storage
         ));
 
     }
@@ -82,6 +90,7 @@ class AppInstance implements \Serializable {
 
         $data = unserialize($data);
         $this->service = $data[0];
+        $this->storage = $data[1];
 
     }
 

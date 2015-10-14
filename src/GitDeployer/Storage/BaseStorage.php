@@ -25,6 +25,12 @@ class BaseStorage {
      */
     protected $helpers;
 
+    /**
+     * Holds an array of DeploymentStatus objects
+     * @var array of \GitDeployer\Objects\DeploymentStatus
+     */
+    protected $deploymentStatuses = null;
+
     //////////////////////////////////////////////////////////////////
     // Overridable functions
     //////////////////////////////////////////////////////////////////
@@ -35,6 +41,14 @@ class BaseStorage {
      */
     public function getDescription() {
         throw new \Exception('You must override the getDescription() method in your storage service!');
+    }
+
+    /**
+     * Method to override in child services
+     * @return string
+     */
+    public function getDeploymentStatus($project) {
+        throw new \Exception('You must override the getDeploymentStatus() method in your storage service!');
     }
 
     /**

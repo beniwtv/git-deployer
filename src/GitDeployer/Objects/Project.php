@@ -18,10 +18,16 @@ class Project extends BaseObject {
     protected $description;
 
     /**
-     * The project's URL on the Git service
+     * The project's git URL on the Git service
      * @var string
      */
     protected $url;
+
+    /**
+     * The project's homepage on the Git service
+     * @var string
+     */
+    protected $homepage;
 
 
 }

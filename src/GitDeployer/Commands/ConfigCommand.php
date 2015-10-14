@@ -25,6 +25,25 @@ HELP
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         
+        // -> We check if there is already an app instance, else we
+        // can not configure git-deployer yet
+        $hasStorage = false;
+
+        try {
+            // -> We need to throw an error if we're loggin in to another
+            // service than the currently logged in!
+            $instance = \GitDeployer\AppInstance::getInstance();
+            $storageService = $instance->storage();            
+
+            if (is_object($storageService) && $storageService instanceof \GitDeployer\Storage\BaseStorage) {
+                $hasStorage = str_replace(array('GitDeployer\Storage\\', 'Storage'), array('', ''), get_class($storageService));
+            }
+        } catch(\Exception $e) {
+            throw new \RuntimeException(
+                'Please log-in to a service first!'
+            );
+        }
+
         $output->writeln(
             <<<INTRO
 Welcome to the configuration wizard for Git-Deployer!
@@ -43,7 +62,7 @@ INTRO
 First, you will need to configure a <info>storage service</info>:
 
         A <info>storage service</info> is responsible of storing Git-Deployer's state,
-    ❓   such as what repositories are deployed, which version/tag was deployed, where
+    i   such as what repositories are deployed, which version/tag was deployed, where
         they are deployed, etc...
 
 The following <info>storage services</info> exist in this build:
@@ -53,10 +72,12 @@ INTRO
         );
 
         $services = \GitDeployer\Storage\BaseStorage::getStorageServicesForIterating();
+        $default = ($hasStorage ? array_search($hasStorage, $services) : 0 );
+
         $helper = $this->getHelper('question');
         
         // -> Get storage service to use
-        $question = new ChoiceQuestion('Which storage service would you like to use?', $services);
+        $question = new ChoiceQuestion('Which storage service would you like to use?', $services, $default);
         $question->setValidator(function ($answer) use($services) {
             if (!isset($services[$answer])) {
                 throw new \RuntimeException(
@@ -68,10 +89,30 @@ INTRO
         });
 
         $number = $helper->ask($input, $output, $question);
-        $storageService = \GitDeployer\Storage\BaseStorage::createServiceInstance($services[$number], $input, $output, $this->getHelperSet());
-        $storageService->configure();
+
+        // If we selected the already existing storage instance, load
+        // it up so we can see the already defined values
+        if ($hasStorage && $number == $default) {
+            $storageService->setInstances($input, $output, $this->getHelperSet());
+        } else {
+            $storageService = \GitDeployer\Storage\BaseStorage::createServiceInstance($services[$number], $input, $output, $this->getHelperSet());
+        }
         
-        print_r($storageService);
+        // -> Now that we have a storage service, add this to 
+        // the AppInstance, to be opened later again
+        if ($storageService->configure()) {
+            $instance->storage($storageService)                
+                     ->save();
+        }
+        
+        $output->writeln(
+            <<<OUTRO
+
+This finishes the configuration of Git-Deployer!
+Thank you!
+OUTRO
+        );
+
     }
 
 }

@@ -58,7 +58,52 @@ class GitHubService extends BaseService {
      * Get a list of projects from GitHub
      * @return array of \Git-Deployer\Objects\Project
      */
-    public function getProjects() {
+    public function getProjects($url = 'user/repos') {
+
+        if (strlen($this->token) > 0) {
+            $client = $this->_createClient($this->token);
+
+            try {
+                $response = $client->get($url);
+                $projects = json_decode($response->getBody());
+
+                $projects = array_map( function ($p) {
+                    $project = new \GitDeployer\Objects\Project();
+                    $project->name($p->name)
+                            ->description($p->description)
+                            ->url($p->clone_url)
+                            ->homepage($p->html_url);
+
+                    return $project;
+                }, $projects);
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+
+                    preg_match('/<.*user\/repos(.*)>; rel="next"/', $link, $matches);
+
+                    if (isset($matches[1])) {
+                        $cleanLink = 'user/repos' . $matches[1];
+
+                        $moreProjects = $this->getProjects($cleanLink);
+                        if (is_array($moreProjects)) $projects = array_merge($projects, $moreProjects);
+                    }
+                }
+
+                return $projects;
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 401
+                    || $e->getResponse()->getStatusCode() == 403) {
+                    return $this->_interactiveLogin();
+                } else {
+                    throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+                }
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
 
     }
 
@@ -83,9 +128,7 @@ class GitHubService extends BaseService {
         ];
 
         if ($token != null) {
-            $config['headers'] = [
-                'Authorization' => 'token ' . $token
-            ];
+            $config['headers']['Authorization'] = 'token ' . $token;
         }
 
         $client = new Client($config);
@@ -196,6 +239,17 @@ HELP
         } else {
             throw new \Exception($response->getStatusCode() . ' ' . $response->getReasonPhrase());
         }
+    }
+
+    /**
+     * Makes sure we only serialize needed data, else we may
+     * put too much cruft in the serialized file that we can't restore
+     * @return array
+     */
+    public function __sleep() {
+
+        return array('url', 'token');
+        
     }
 
 }
