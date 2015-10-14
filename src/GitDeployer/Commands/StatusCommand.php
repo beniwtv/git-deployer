@@ -38,11 +38,13 @@ class StatusCommand extends Command {
         ));
 
         foreach ($projects as $key => $project) {
+            $status = $storage->getDeploymentStatus($project);
+
             $table->addRow(array(
                 $key,
                 $project->name(),
-                $storage->getDeployedVersion($project),
-                $storage->getDeploymentStatus($project) ? $storage->getDeploymentStatus($project) : 'Not added to Git-Deployer yet',
+                $status->isDeployd($project) ? $status->getDeployedVersion($project) : 'N/A',
+                $status->isDeployd($project) ? $status->getDeploymentInfo() : 'Not added to Git-Deployer yet',
             ));   
         }
 

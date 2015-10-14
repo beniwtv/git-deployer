@@ -76,7 +76,8 @@ class GitLabService extends BaseService {
                     $project = new \GitDeployer\Objects\Project();
                     $project->name($p->name)
                             ->description($p->description)
-                            ->url($p->http_url_to_repo);
+                            ->url($p->http_url_to_repo)
+                            ->homepage($p->web_url);
 
                     return $project;
                 }, $projects);
@@ -215,6 +216,17 @@ class GitLabService extends BaseService {
             throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
         }
 
+    }
+
+    /**
+     * Makes sure we only serialize needed data, else we may
+     * put too much cruft in the serialized file that we can't restore
+     * @return array
+     */
+    public function __sleep() {
+
+        return array('privateKey', 'url', 'user');
+        
     }
 
 }

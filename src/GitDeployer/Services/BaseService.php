@@ -56,6 +56,22 @@ class BaseService {
     }
 
     /**
+     * Gets available services from the services directory
+     * @return array
+     */
+    private static function _getVCServices() {
+
+        $services = scandir(__DIR__);        
+        $services = array_map(function($m) {
+            if (!in_array($m, array('.','..','BaseService.php')))
+                return str_replace('Service.php', '', $m);
+        }, $services);
+
+        return $services;
+
+    }
+
+    /**
      * Creates a new service instance to use throughout
      * the whole application
      * @param  string $service The service name to create
@@ -94,22 +110,6 @@ class BaseService {
         $this->output  = $output;
         $this->helpers = $helpers;
 
-    }
-
-    /**
-     * Gets available services from the services directory
-     * @return array
-     */
-    private static function _getVCServices() {
-
-        $services = scandir(__DIR__);        
-        $services = array_map(function($m) {
-            if (!in_array($m, array('.','..','BaseService.php')))
-                return str_replace('Service.php', '', $m);
-        }, $services);
-
-        return $services;
-
-    }
+    }    
 
 }
