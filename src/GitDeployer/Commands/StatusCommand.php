@@ -43,8 +43,8 @@ class StatusCommand extends Command {
             $table->addRow(array(
                 $key,
                 $project->name(),
-                $status->isDeployd($project) ? $status->getDeployedVersion($project) : 'N/A',
-                $status->isDeployd($project) ? $status->getDeploymentInfo() : 'Not added to Git-Deployer yet',
+                $status->added() ? $status->getDeployedVersion($project) : 'N/A',
+                $status->added() ? $status->getDeploymentInfo() : 'Not added to Git-Deployer yet',
             ));   
         }
 

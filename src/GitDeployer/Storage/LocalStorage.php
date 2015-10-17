@@ -28,23 +28,16 @@ class LocalStorage extends BaseStorage {
      * status file if not already done so
      * @return \GitDeployer\Objects\DeploymentStatus
      */
-    public function getDeploymentStatus($project) {
+    public function getDeploymentStatus(\GitDeployer\Objects\Project $project) {
 
         // -> Load status file, if not done so yet
-        if ($this->deploymentStatuses == null) {
-            if ( $statuses = @file_get_contents($this->path) ) {
-                // Success!!
-                $statuses = json_decode($statuses);
-            } else {
-                throw new \Exception('Could not open path: "' . $this->path . '"! ' . "\n" .  'Error was: ' . error_get_last()['message']);
-            }
-        }
+        $this->_loadDeploymentStatuses();
 
         // -> Check if we already have a status object
         // that matches our project
         $currentStatusObject = null;
 
-        foreach ($statuses as $status) {
+        foreach ($this->deploymentStatuses as $status) {
             if ($status->project() == $project->name()) {
                 $currentStatusObject = $status;
             }
@@ -57,6 +50,65 @@ class LocalStorage extends BaseStorage {
         }
 
         return $status;
+    }
+
+    /**
+     * Adds a new deployment status for requested project, loads the
+     * status file if not already done so, and rejects the request
+     * if the project was already added
+     * @param  \GitDeployer\Objects\Project $project The project to add 
+     * @return boolean
+     */
+    public function addNewDeploymentStatus(\GitDeployer\Objects\Project $project) {
+        
+        // -> Load status file, if not done so yet
+        $status = $this->getDeploymentStatus($project);
+
+        if ($status->added()) {
+            // -> Project already added, inform user
+            throw new \Exception('Project "' . $project->name() . '" is already added to Git-Deployer! Please check the status command!');     
+        } else {
+            // -> Ready to add project to statuses
+            $status->added(true);
+            $this->deploymentStatuses[] = $status;
+
+            $this->_saveDeploymentStatuses();
+        }
+
+    }
+
+    /**
+     * Removes the deployment status for requested project, loads the
+     * status file if not already done so, and rejects the request
+     * if the project does not exist
+     * @param  string  $project The project to add 
+     * @return boolean
+     */
+    public function removeDeploymentStatusForProject($project) {
+
+        // -> Load status file, if not done so yet
+        $this->_loadDeploymentStatuses();
+
+        // -> Check if we already have a status object
+        // that matches our project
+        $currentStatusObject = -1;
+
+        foreach ($this->deploymentStatuses as $key => $status) {
+            if ($status->project() == $project) {
+                $currentStatusObject = $key;
+            }
+        }
+
+        if ($currentStatusObject < 0) {
+            // -> Project not found, inform user
+            throw new \Exception('Project "' . $project . '" is not present in Git-Deployer! Please check the status command!');    
+        } else {
+            unset($this->deploymentStatuses[$currentStatusObject]);
+            $this->deploymentStatuses = array_values($this->deploymentStatuses);
+
+            $this->_saveDeploymentStatuses();
+        }
+
     }
 
     /**
@@ -98,6 +150,37 @@ class LocalStorage extends BaseStorage {
         } else {
             throw new \Exception('Could not save file to path: "' . $this->path . '"! ' . "\n" .  'Error was: ' . error_get_last()['message']);
             return false;
+        }
+
+    }
+
+    /**
+     * Loads the deployment status file, if not done so yet
+     */
+    private function _loadDeploymentStatuses() {
+
+        if ($this->deploymentStatuses == null) {
+            if ($statuses = @file_get_contents($this->path)) {
+                // Success!!
+                $this->deploymentStatuses = \GitDeployer\Objects\BaseObject::jsonUnserialize(json_decode($statuses));
+            } else {
+                throw new \Exception('Could not open path: "' . $this->path . '"! ' . "\n" .  'Error was: ' . error_get_last()['message']);
+            }
+        }
+
+    }
+
+    /**
+     * Saves the deployment status file to disk
+     */
+    private function _saveDeploymentStatuses() {
+
+        $statuses = json_encode($this->deploymentStatuses);
+
+        if (@file_put_contents($this->path, $statuses)) {
+            // Success!!
+        } else {
+            throw new \Exception('Could not save path: "' . $this->path . '"! ' . "\n" .  'Error was: ' . error_get_last()['message']);
         }
 
     }
