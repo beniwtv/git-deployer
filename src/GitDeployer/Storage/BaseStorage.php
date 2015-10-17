@@ -45,10 +45,26 @@ class BaseStorage {
 
     /**
      * Method to override in child services
-     * @return string
+     * @return \GitDeployer\Objects\DeploymentStatus
      */
-    public function getDeploymentStatus($project) {
+    public function getDeploymentStatus(\GitDeployer\Objects\Project $project) {
         throw new \Exception('You must override the getDeploymentStatus() method in your storage service!');
+    }
+
+    /**
+     * Method to override in child services
+     * @return boolean
+     */
+    public function addNewDeploymentStatus(\GitDeployer\Objects\DeploymentStatus $status) {
+        throw new \Exception('You must override the addNewDeploymentStatus() method in your storage service!');
+    }
+
+     /**
+     * Method to override in child services
+     * @return boolean
+     */
+    public function removeDeploymentStatusForProject($project) {
+         throw new \Exception('You must override the removeDeploymentStatusForProject() method in your storage service!');
     }
 
     /**

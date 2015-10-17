@@ -29,5 +29,4 @@ class Project extends BaseObject {
      */
     protected $homepage;
 
-
 }
