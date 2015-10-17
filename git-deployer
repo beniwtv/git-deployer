@@ -9,6 +9,7 @@ use GitDeployer\Commands\StatusCommand;
 use GitDeployer\Commands\ConfigCommand;
 use GitDeployer\Commands\AddCommand;
 use GitDeployer\Commands\RemoveCommand;
+use GitDeployer\Commands\InfoCommand;
 
 use Symfony\Component\Console\Application;
 
@@ -20,4 +21,5 @@ $deployer->add(new ConfigCommand());
 $deployer->add(new StatusCommand());
 $deployer->add(new AddCommand());
 $deployer->add(new RemoveCommand());
+$deployer->add(new InfoCommand());
 $deployer->run();

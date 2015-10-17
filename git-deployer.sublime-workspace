@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"ava",
+				"$availableServices〔variable〕"
+			],
+			[
+				"ser",
+				"$service〔variable〕"
+			],
+			[
+				"servi",
+				"$serviceStr〔variable〕"
+			],
+			[
+				"w",
+				"writeln〔function〕"
+			],
+			[
+				"error",
+				"errorMessages"
+			],
+			[
 				"pro",
 				"$project〔variable〕"
 			],
@@ -288,10 +308,10 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     4ad284c Pushing beginnings of the \"config\" command - WIP (Don't try this at home ;)\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     563f3e6 - Show error if trying to log-in when already logged in - More work on the config command\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 1010,
+				"buffer_size": 1024,
 				"line_ending": "Unix",
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
@@ -306,10 +326,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 138.0,
-		"last_filter": "push",
+		"height": 392.0,
+		"last_filter": "pus",
 		"selected_items":
 		[
+			[
+				"pus",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
 			[
 				"push",
 				"Git: Push"
@@ -325,10 +353,6 @@
 			[
 				"sftp",
 				"SFTP: Browse Server…"
-			],
-			[
-				"comm",
-				"Git: Commit"
 			],
 			[
 				"status",
@@ -403,15 +427,18 @@
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/ConfigCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/BaseStorage.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/LocalStorage.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Project.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/ConfigCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/BaseObject.php",
 		"/tmp/sublime-sftp-browse-1437577457/web2.apac.globalroaming.com/var/www/secure/css/style.css",
@@ -429,9 +456,6 @@
 		"/tmp/sublime-sftp-browse-1437571748/web2.apac.globalroaming.com/var/www/secure/eurail/assets/js/signup.js",
 		"/tmp/sublime-sftp-browse-1437572540/web2.apac.globalroaming.com/var/www/secure/eurail/class/ip2location.class.php",
 		"/tmp/sublime-sftp-browse-1437571799/web2.apac.globalroaming.com/var/www/secure/eurail/backend.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE.orig",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/VersionCommand.php",
@@ -625,15 +649,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1010,
+						"buffer_size": 1024,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								370,
-								370
+								570,
+								570
 							]
 						],
 						"settings":
