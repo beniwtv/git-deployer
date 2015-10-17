@@ -18,7 +18,7 @@ curl -o /usr/bin/git-deployer https://github.com/git-deployer
 ```
 
 2) Using Git-Deployer
--------------------------------------
+---------------------
 
 First, you will need to log-in to a Git service, like GitLab or GitHub. To
 know which services are available to you currently, use: 
@@ -42,6 +42,47 @@ the configuration for the rest of Git-Deployer:
 git-deployer config
 ```
 
-Now, see git-deployer -h for more commands!
+After you have sucessfully configured Git-Deployer, you can check the status of your
+deployments with the status command:
+
+```
+git-deployer status
+```
+
+To obtain a little bit more information about a Git project, use the info command:
+
+```
+git-deployer info <projectname>
+```
+
+You can also delete all information from Git-Deployer if you use the logout command:
+
+```
+git-deployer logout
+```
+
+3) Deployment with Git-Deployer
+--------------------------------
+
+To be able to deploy a Git repository with Git-Deployer, you must first add the project
+so that Git-Deployer is made aware of the new project:
+
+```
+git-deployer add <projectname>
+```
+
+You can also remove an added Project with the remove command:
+
+```
+git-deployer remove <projectname>
+```
+
+<To be continued...>
+
+
+4) More!
+--------
+
+See git-deployer -h for more commands!
 
 [1]: https://github.com/git-deployer
