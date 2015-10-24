@@ -1,3 +1,7 @@
+[![Dependency Status](https://gemnasium.com/beniwtv/git-deployer.svg)](https://gemnasium.com/beniwtv/git-deployer)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0d9a4c7c-d2c4-422a-ac23-19353e6021a1/mini.png)](https://insight.sensiolabs.com/projects/0d9a4c7c-d2c4-422a-ac23-19353e6021a1)
+[![License](https://img.shields.io/github/license/beniwtv/git-deployer.svg)](https://img.shields.io/github/license/beniwtv/git-deployer.svg)
+
 Git-Deployer
 ============
 
