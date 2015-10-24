@@ -7,10 +7,11 @@
         "psr-0": { "": "src/" }
     },
     "require": {
-        "php": ">=5.5",
+        "php": ">=5.6",
         "symfony/console": "2.7.*",
         "dnoegel/php-xdg-base-dir": "^0.1.0",
-        "guzzlehttp/guzzle": "~6.0"        
+        "guzzlehttp/guzzle": "~6.0",
+        "gitonomy/gitlib": "dev-master"
     },
     "minimum-stability": "stable"   
 }

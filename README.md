@@ -64,6 +64,13 @@ git-deployer logout
 3) Deployment with Git-Deployer
 --------------------------------
 
+Sometimes, it is useful to see the Git history before deploying. You can show the history
+of your Git repository with the history command:
+
+```
+git-deployer history <projectname>
+```
+
 To be able to deploy a Git repository with Git-Deployer, you must first add the project
 so that Git-Deployer is made aware of the new project:
 
@@ -75,6 +82,13 @@ You can also remove an added Project with the remove command:
 
 ```
 git-deployer remove <projectname>
+```
+
+Next step is to create a .deployerfile in your repository, which will tell Git-Deployer
+how to deploy your project. For that, execute the init command in the root of your Git repository:
+
+```
+git-deployer init
 ```
 
 <To be continued...>
