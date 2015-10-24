@@ -32,6 +32,8 @@ class HistoryCommand extends Command {
         $appService->setInstances($input, $output, $this->getHelperSet());
 
         // -> Get currently known repositories
+        $hasBeenFound = false;
+
         foreach ($appService->getProjects() as $key => $project) {
             if ($project->name() == $repository) {
                 list($link, $history) = $appService->getHistory($project);
@@ -40,23 +42,28 @@ class HistoryCommand extends Command {
                 $output->writeln('<comment>History information about project</comment> <info>"' . $repository . '"</info>:' . "\n");
                 $this->printHistory($history, $output);            
 
-                while(strlen($link) > 0) {
+                $isRunning = true;
+
+                while(strlen($link) > 0 && $isRunning) {
                     $helper = $this->getHelper('question');
                     $question = new ConfirmationQuestion('Continue to next page? (y/n)', false);
 
                     if (!$helper->ask($input, $output, $question)) {
-                        exit(0);
+                        $isRunning = false;
                     } else {
                         list($link, $history) = $appService->getHistory($project);
                         $this->printHistory($history, $output);
                     }
                 }
                
-                exit(0);
+                $hasBeenFound = true;
+                break;
             }
         }
         
-        throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');       
+        if (!$hasBeenFound) {
+            throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');       
+        }
 
     }
 

@@ -43,36 +43,33 @@ HELP
 
         // -> We check if there is already an app instance, and use that
         // if it exists to log-in or pre-populate data
+        $existingService = false;
+
         try {
-            // -> We need to throw an error if we're loggin in to another
-            // service than the currently logged in!
             $instance = \GitDeployer\AppInstance::getInstance();
             $appService = $instance->service();
 
-            preg_match('#.*\.*\\\(.*)Service#', get_class($appService), $matches);
-
-            if ($matches[1] != $service) {
-                $errorMessages = array(
-                    '',
-                    '[Error]',
-                    'You are already logged in to ' . $matches[1] . '!',
-                    'To change to another service, please logout first.',
-                    ''
-                );
-
-                $formatter = $this->getHelper('formatter');
-                $formattedBlock = $formatter->formatBlock($errorMessages, 'error');
-                $output->writeln($formattedBlock);
-                exit(1);
-            }
-
-            $appService->setInstances($input, $output, $this->getHelperSet());
+            $existingService = true;
         } catch(\Exception $e) {
             $instance = new \GitDeployer\AppInstance();
 
             // -> We first create a new instance of the service, and let it
             // configure itself (it may ask questions, etc...)
             $appService = \GitDeployer\Services\BaseService::createServiceInstance($service, $input, $output, $this->getHelperSet());
+        
+            $existingService = false;
+        }
+
+        if ($existingService) {
+            // -> We need to throw an error if we're logging in to another
+            // service than the currently logged in!
+            preg_match('#.*\.*\\\(.*)Service#', get_class($appService), $matches);
+
+            if ($matches[1] !== $service) {
+                throw new \Exception('You are already logged in to ' . $matches[1] . "!\nTo change to another service, please logout first.");
+            }
+
+            $appService->setInstances($input, $output, $this->getHelperSet());
         }
 
         $appService->login();

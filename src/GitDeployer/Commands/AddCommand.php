@@ -38,6 +38,8 @@ class AddCommand extends Command {
         // Git-Deployer  
         $output->writeln('Adding new project <info>"' . $repository . '"</info>...');
 
+        $hasBeenFound = false;
+
         foreach ($appService->getProjects() as $key => $project) {
             if ($project->name() == $repository) {
                 // -> Once we have our project, add it to the deployer projects
@@ -45,12 +47,15 @@ class AddCommand extends Command {
                 $storage->addNewDeploymentStatus($project);
                 $output->writeln('The project <info>"' . $repository . '"</info> was successfully added to Git-Deployer!');
 
-                exit;
+                $hasBeenFound = true;
+                break;
             }
         }
 
-        throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');        
-
+        if (!$hasBeenFound) {
+            throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');        
+        }
+        
     }
 
 }
