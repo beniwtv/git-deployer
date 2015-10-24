@@ -5,7 +5,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class HistoryCommand extends Command {
     
@@ -31,9 +31,6 @@ class HistoryCommand extends Command {
         $appService = $instance->service();
         $appService->setInstances($input, $output, $this->getHelperSet());
 
-        // .. and storage
-        $storage = $instance->storage();
-
         // -> Get currently known repositories
         foreach ($appService->getProjects() as $key => $project) {
             if ($project->name() == $repository) {
@@ -41,7 +38,7 @@ class HistoryCommand extends Command {
 
                 // History information
                 $output->writeln('<comment>History information about project</comment> <info>"' . $repository . '"</info>:' . "\n");
-                $this->_printHistory($history, $output);            
+                $this->printHistory($history, $output);            
 
                 while(strlen($link) > 0) {
                     $helper = $this->getHelper('question');
@@ -51,7 +48,7 @@ class HistoryCommand extends Command {
                         exit(0);
                     } else {
                         list($link, $history) = $appService->getHistory($project);
-                        $this->_printHistory($history, $output);
+                        $this->printHistory($history, $output);
                     }
                 }
                
@@ -67,7 +64,7 @@ class HistoryCommand extends Command {
      * Prints history like "git log" to the console
      * @param  array $history The history items to print
      */
-    private function _printHistory($history, $output) {
+    private function printHistory($history, $output) {
 
         foreach ($history as $item) {
             $output->writeln('<comment>commit</comment> <info>' . $item->commit() . '</info>');

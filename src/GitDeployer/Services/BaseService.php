@@ -72,7 +72,7 @@ class BaseService {
     static function getVCSServicesForHelp() {
 
         // -> Get available services from services directory
-        $services = self::_getVCServices();
+        $services = self::getVCServices();
 
         // -> Print in a human-readable way
         return implode("\n ", array_filter($services));
@@ -83,7 +83,7 @@ class BaseService {
      * Gets available services from the services directory
      * @return array
      */
-    private static function _getVCServices() {
+    private static function getVCServices() {
 
         $services = scandir(__DIR__);        
         $services = array_map(function($m) {
@@ -106,7 +106,7 @@ class BaseService {
      */
     static function createServiceInstance($service, InputInterface $input, OutputInterface $output, HelperSet $helpers) {
 
-        $availableServices = self::_getVCServices();
+        $availableServices = self::getVCServices();
 
         if (!in_array($service, $availableServices))
             throw new \Exception('This VCS service does not exist! See "help login" for services.');

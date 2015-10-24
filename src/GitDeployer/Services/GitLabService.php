@@ -40,7 +40,7 @@ class GitLabService extends BaseService {
     public function login() {
 
         if (strlen($this->privateKey) > 0) {
-            $client = $this->_createClient($this->privateKey);
+            $client = $this->createClient($this->privateKey);
 
             try {
                 $response = $client->get('projects');
@@ -66,7 +66,7 @@ class GitLabService extends BaseService {
     public function getProjects($url = 'projects') {
 
         if (strlen($this->privateKey) > 0) {
-            $client = $this->_createClient($this->privateKey);
+            $client = $this->createClient($this->privateKey);
 
             try {
                 $response = $client->get($url);
@@ -117,7 +117,7 @@ class GitLabService extends BaseService {
     public function getHistory(\GitDeployer\Objects\Project $project, $url = 'projects/:id/repository/commits?page=0') {
 
         if (strlen($this->privateKey) > 0) {
-            $client = $this->_createClient($this->privateKey);
+            $client = $this->createClient($this->privateKey);
 
             try {
                 $url = str_replace(':id', $project->id(), $url);
@@ -176,7 +176,7 @@ class GitLabService extends BaseService {
     public function getTags(\GitDeployer\Objects\Project $project, $url = 'projects/:id/repository/tags') {
 
         if (strlen($this->privateKey) > 0) {
-            $client = $this->_createClient($this->privateKey);
+            $client = $this->createClient($this->privateKey);
 
             try {
                 $url = str_replace(':id', $project->id(), $url);
@@ -231,7 +231,7 @@ class GitLabService extends BaseService {
      * @param  $key The private key to use, if any
      * @return \GuzzleHttp\Client
      */
-    private function _createClient($key = null) {
+    private function createClient($key = null) {
 
         $config = [
             // Base URI is used with relative requests
@@ -306,7 +306,7 @@ class GitLabService extends BaseService {
         // into the GitLab instance
         $this->output->writeln('<info>Logging in to GitLab...</info>');
     
-        $client = $this->_createClient();
+        $client = $this->createClient();
 
         // Login is a FORM post
         try {

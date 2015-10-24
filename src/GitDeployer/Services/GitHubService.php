@@ -2,7 +2,6 @@
 namespace GitDeployer\Services;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Symfony\Component\Console\Question\Question;
 
 class GitHubService extends BaseService {
@@ -35,7 +34,7 @@ class GitHubService extends BaseService {
     public function login() {
 
         if (strlen($this->token) > 0) {
-            $client = $this->_createClient($this->token);
+            $client = $this->createClient($this->token);
 
             try {
                 $response = $client->get('user');
@@ -61,7 +60,7 @@ class GitHubService extends BaseService {
     public function getProjects($url = 'user/repos') {
 
         if (strlen($this->token) > 0) {
-            $client = $this->_createClient($this->token);
+            $client = $this->createClient($this->token);
 
             try {
                 $response = $client->get($url);
@@ -117,7 +116,7 @@ class GitHubService extends BaseService {
     public function getHistory(\GitDeployer\Objects\Project $project, $url = 'repos/:namespace/:repo/commits') {
 
         if (strlen($this->token) > 0) {
-            $client = $this->_createClient($this->token);
+            $client = $this->createClient($this->token);
 
             try {
                 $url = str_replace(':namespace', $project->namespace(), $url);
@@ -177,7 +176,7 @@ class GitHubService extends BaseService {
     public function getTags(\GitDeployer\Objects\Project $project, $url = 'repos/:namespace/:repo/tags') {
 
         if (strlen($this->token) > 0) {
-            $client = $this->_createClient($this->token);
+            $client = $this->createClient($this->token);
 
             try {
                 $url = str_replace(':namespace', $project->namespace(), $url);
@@ -233,7 +232,7 @@ class GitHubService extends BaseService {
      * @param  $token The private access token to use, if any
      * @return \GuzzleHttp\Client
      */
-    private function _createClient($token = null) {
+    private function createClient($token = null) {
 
         $config = [
             // Base URI is used with relative requests
@@ -244,7 +243,7 @@ class GitHubService extends BaseService {
             ]
         ];
 
-        if ($token != null) {
+        if ($token !== null) {
             $config['headers']['Authorization'] = 'token ' . $token;
         }
 
@@ -308,7 +307,7 @@ HELP
         // into the GitHub API
         $this->output->writeln('<info>Logging in to GitHub...</info>');
     
-        $client = $this->_createClient();
+        $client = $this->createClient();
 
         // Login is OAuth
         try {
