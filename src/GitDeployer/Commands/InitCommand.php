@@ -12,7 +12,7 @@ class InitCommand extends Command {
 
         $this
             ->setName('init')
-            ->setDescription('Initializes a skeleton .git-deployer file in your Git repository');
+            ->setDescription('Initializes a skeleton .deployerfile in your Git repository');
 
     }
 
@@ -23,7 +23,16 @@ class InitCommand extends Command {
         $appService = $instance->service();
         $appService->setInstances($input, $output, $this->getHelperSet());
 
-        
+        if (getcwd()) {
+            if (\Gitonomy\Git\Admin::isValidRepository(getcwd())) {
+                // Repo is valid, drop the bare example file there
+                
+            } else {
+                throw new \Exception('"' . getcwd() . '" does not appear to contain a Git repository!');
+            }
+        } else {
+            throw new \Exception('Could not access "' . getcwd() . '"');
+        }
 
     }
 
