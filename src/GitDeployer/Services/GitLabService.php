@@ -74,7 +74,8 @@ class GitLabService extends BaseService {
 
                 $projects = array_map( function ($p) {
                     $project = new \GitDeployer\Objects\Project();
-                    $project->name($p->name)
+                    $project->id($p->id)
+                            ->name($p->name)
                             ->description($p->description)
                             ->url($p->http_url_to_repo)
                             ->homepage($p->web_url);
@@ -100,6 +101,65 @@ class GitLabService extends BaseService {
                 return $projects;
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
+
+    }
+
+    /**
+     * Get a list of history items for a project from GitLab
+     * @return array of \Git-Deployer\Objects\History
+     */
+    public function getHistory(\GitDeployer\Objects\Project $project, $url = 'projects/:id/repository/commits?page=0') {
+
+        if (strlen($this->privateKey) > 0) {
+            $client = $this->_createClient($this->privateKey);
+
+            try {
+                $url = str_replace(':id', $project->id(), $url);
+
+                $response = $client->get($url);
+                $historyData = json_decode($response->getBody());
+
+                $historyData = array_map( function ($h) use ($project) {
+                    $history = new \GitDeployer\Objects\History();
+                    $history->projectname($project->name())
+                            ->commit($h->id)
+                            ->author($h->author_name)
+                            ->authormail($h->author_email)
+                            ->date($h->created_at)
+                            ->message($h->message);
+
+                    return $history;
+                }, $historyData);
+
+                $cleanLink = null;
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+
+                    preg_match('/<.*projects\/.*\/repository/commits(.*)>; rel="next"/', $link, $matches);
+
+                    if (isset($matches[1])) {
+                        $cleanLink = 'projects/:id/repository/commits' . $matches[1];                        
+                    }
+                }
+
+                return array(
+                    $cleanLink,
+                    $historyData
+                );
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 401
+                    || $e->getResponse()->getStatusCode() == 403) {
+                    return $this->_interactiveLogin();
+                } else {
+                    throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+                }
             }
         } else {
             throw new \Exception('You must log-in to a service first!');            

@@ -25,13 +25,14 @@ class StatusCommand extends Command {
 
         // .. and storage
         $storage = $instance->storage();
+        if ($storage == null) throw new \RuntimeException('Please configure Git-Deployer first!');
 
         $projects = $appService->getProjects();
         
         // -> Print out status table
         $table = new Table($output);
         $table->setHeaders(array(
-            '#',
+            'ID',
             'Name',
             'Version',
             'Status'
@@ -41,7 +42,7 @@ class StatusCommand extends Command {
             $status = $storage->getDeploymentStatus($project);
 
             $table->addRow(array(
-                $key,
+                $project->id(),
                 $project->name(),
                 $status->added() ? $status->getDeployedVersion($project) : 'N/A',
                 $status->added() ? $status->getDeploymentInfo() : 'Not added to Git-Deployer yet',
