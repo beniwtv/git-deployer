@@ -31,7 +31,7 @@ class LocalStorage extends BaseStorage {
     public function getDeploymentStatus(\GitDeployer\Objects\Project $project) {
 
         // -> Load status file, if not done so yet
-        $this->_loadDeploymentStatuses();
+        $this->loadDeploymentStatuse();
 
         // -> Check if we already have a status object
         // that matches our project
@@ -87,7 +87,7 @@ class LocalStorage extends BaseStorage {
     public function removeDeploymentStatusForProject($project) {
 
         // -> Load status file, if not done so yet
-        $this->_loadDeploymentStatuses();
+        $this->loadDeploymentStatuse();
 
         // -> Check if we already have a status object
         // that matches our project
@@ -149,7 +149,6 @@ class LocalStorage extends BaseStorage {
             return true;
         } else {
             throw new \Exception('Could not save file to path: "' . $this->path . '"! ' . "\n" .  'Error was: ' . error_get_last()['message']);
-            return false;
         }
 
     }
@@ -157,7 +156,7 @@ class LocalStorage extends BaseStorage {
     /**
      * Loads the deployment status file, if not done so yet
      */
-    private function _loadDeploymentStatuses() {
+    private function loadDeploymentStatuse() {
 
         if ($this->deploymentStatuses == null) {
             if ($statuses = @file_get_contents($this->path)) {

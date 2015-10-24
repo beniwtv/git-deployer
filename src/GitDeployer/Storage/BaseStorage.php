@@ -86,7 +86,7 @@ class BaseStorage {
     static function getStorageServicesForHelp() {
 
         // -> Get available services from storage directory
-        $services = self::_getStorageServices();
+        $services = self::getStorageServices();
 
         // -> Print in a human-readable way
         $serviceStr = '';
@@ -109,7 +109,7 @@ class BaseStorage {
         // -> Get available services from storage directory
         return array_values(array_map(function ($m) {
             return $m[0];
-        }, self::_getStorageServices()));
+        }, self::getStorageServices()));
 
     }
 
@@ -124,10 +124,10 @@ class BaseStorage {
      */
     static function createServiceInstance($service, InputInterface $input, OutputInterface $output, HelperSet $helpers) {
 
-        $availableServices = self::_getStorageServices();
+        $availableServices = self::getStorageServices();
         $availableServices = array_values(array_map(function ($m) {
             return $m[0];
-        }, self::_getStorageServices()));
+        }, self::getStorageServices()));
 
         if (!in_array($service, $availableServices))
             throw new \Exception('This storage service does not exist! See "help login" for services.');
@@ -161,7 +161,7 @@ class BaseStorage {
      * Gets available services from the storage directory
      * @return array
      */
-    private static function _getStorageServices() {
+    private static function getStorageServices() {
 
         $services = scandir(__DIR__);        
         $services = array_map(function($m) {

@@ -68,7 +68,7 @@ class InfoCommand extends Command {
 
                 $table->addRow(array(
                     'Tags',
-                    implode(', ', array_map(function ($t) {
+                    implode(', ', array_map(function (\GitDeployer\Objects\Tag $t) {
                         return $t->name();
                     }, $appService->getTags($project)))
                 ));
