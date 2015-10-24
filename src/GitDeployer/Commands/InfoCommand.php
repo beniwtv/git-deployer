@@ -35,6 +35,8 @@ class InfoCommand extends Command {
         $storage = $instance->storage();
 
         // -> Get currently known repositories
+        $hasBeenFound = false; 
+        
         foreach ($appService->getProjects() as $key => $project) {
             if ($project->name() == $repository) {
                 $status = $storage->getDeploymentStatus($project);
@@ -105,11 +107,14 @@ class InfoCommand extends Command {
                     $table->render();
                 }
 
-                exit(0);
+                $hasBeenFound = true;
+                break;
             }
         }
         
-        throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');       
+        if (!$hasBeenFound) {
+            throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');       
+        }
 
     }
 
