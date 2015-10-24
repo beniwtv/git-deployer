@@ -50,10 +50,13 @@ class InfoCommand extends Command {
                 $output->writeln('<comment>General information about project</comment> <info>"' . $repository . '"</info>:' . "\n");
 
                 $arrayKeys = array(
-                    'Name'          => 'name',
-                    'Description'   => 'description',
-                    'Git URL'       => 'url',
-                    'Homepage URL'  => 'homepage'
+                    'ID (on service)'   => 'id',
+                    'Name'              => 'name',
+                    'Path (User/Org)'   => 'namespace',
+                    'Description'       => 'description',
+                    'Git URL'           => 'url',
+                    'Homepage URL'      => 'homepage',
+                    'Default branch'    => 'defaultBranch'
                 );
 
                 foreach ($arrayKeys as $text => $property) {
@@ -62,6 +65,13 @@ class InfoCommand extends Command {
                         call_user_func(array($project, $property))
                     ));
                 }        
+
+                $table->addRow(array(
+                    'Tags',
+                    implode(', ', array_map(function ($t) {
+                        return $t->name();
+                    }, $appService->getTags($project)))
+                ));
 
                 $table->addRow(array(
                     'Added to Git-Deployer?',

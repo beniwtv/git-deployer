@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"p",
+				"$project〔variable〕"
+			],
+			[
+				"pro",
+				"$property〔variable〕"
+			],
+			[
+				"arra",
+				"$arrayKeys〔variable〕"
+			],
+			[
 				"ava",
 				"$availableServices〔variable〕"
 			],
@@ -22,10 +34,6 @@
 			[
 				"error",
 				"errorMessages"
-			],
-			[
-				"pro",
-				"$project〔variable〕"
 			],
 			[
 				"for",
@@ -288,10 +296,6 @@
 				"bundles"
 			],
 			[
-				"arra",
-				"array"
-			],
-			[
 				"scr",
 				"scrollTop"
 			],
@@ -308,10 +312,10 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     563f3e6 - Show error if trying to log-in when already logged in - More work on the config command\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     2f73da8 Updated readme\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 1024,
+				"buffer_size": 949,
 				"line_ending": "Unix",
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
@@ -326,24 +330,28 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "pus",
+		"height": 138.0,
+		"last_filter": "push",
 		"selected_items":
 		[
-			[
-				"pus",
-				"Git: Push"
-			],
-			[
-				"comm",
-				"Git: Commit"
-			],
 			[
 				"push",
 				"Git: Push"
 			],
 			[
 				"commit",
+				"Git: Commit"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
+			[
+				"pus",
+				"Git: Push"
+			],
+			[
+				"comm",
 				"Git: Commit"
 			],
 			[
@@ -421,25 +429,24 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage"
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects"
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InfoCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Project.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/ConfigCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/BaseStorage.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/LocalStorage.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Project.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/BaseObject.php",
 		"/tmp/sublime-sftp-browse-1437577457/web2.apac.globalroaming.com/var/www/secure/css/style.css",
 		"/tmp/sublime-sftp-browse-1437577236/web2.apac.globalroaming.com/var/www/secure/tplv3/ajax/home.tpl",
@@ -553,8 +560,7 @@
 		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/master.tpl",
 		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciawebcontrollers.js",
 		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/functions.js",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciaweb.js",
-		"/home/beniwtv/Downloads/2013-08/Format2/2013-08-04.csv"
+		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciaweb.js"
 	],
 	"find":
 	{
@@ -649,15 +655,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1024,
+						"buffer_size": 949,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								570,
-								570
+								144,
+								144
 							]
 						],
 						"settings":
@@ -722,6 +728,10 @@
 		"height": 118.0
 	},
 	"output.git-custom":
+	{
+		"height": 118.0
+	},
+	"output.git-pull":
 	{
 		"height": 118.0
 	},
