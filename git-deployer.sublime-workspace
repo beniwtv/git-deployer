@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"mat",
+				"$matches〔variable〕"
+			],
+			[
+				"has",
+				"$hasBeenFound〔variable〕"
+			],
+			[
+				"get",
+				"getenv〔function〕"
+			],
+			[
+				"repos",
+				"repository"
+			],
+			[
+				"name",
+				"namespace"
+			],
+			[
 				"p",
 				"$project〔variable〕"
 			],
@@ -134,10 +154,6 @@
 			[
 				"quo",
 				"quoteInfo"
-			],
-			[
-				"get",
-				"getFile"
 			],
 			[
 				"delet",
@@ -312,14 +328,22 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     2f73da8 Updated readme\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     95a0a12 More fixes\n\n\nChanges:\n	Modified   README.md\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 949,
+				"buffer_size": 933,
 				"line_ending": "Unix",
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
 				"scratch": true
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 2559,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -339,12 +363,12 @@
 				"Git: Push"
 			],
 			[
-				"commit",
+				"com",
 				"Git: Commit"
 			],
 			[
-				"pull",
-				"Git: Pull"
+				"status",
+				"Git: Status"
 			],
 			[
 				"pus",
@@ -355,16 +379,20 @@
 				"Git: Commit"
 			],
 			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
+			[
 				"stats",
 				"Git: Status"
 			],
 			[
 				"sftp",
 				"SFTP: Browse Server…"
-			],
-			[
-				"status",
-				"Git: Status"
 			],
 			[
 				"tag",
@@ -428,26 +456,34 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects"
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands"
 	],
 	"file_history":
 	[
-		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/HistoryCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/AddCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InfoCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Project.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/ConfigCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/BaseStorage.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/LocalStorage.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/LocalStorage.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/BaseStorage.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Tag.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/Project.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/History.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/DeploymentStatus.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/BaseObject.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/RemoveCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InitCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/ConfigCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/StatusCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/git-deployer",
 		"/tmp/sublime-sftp-browse-1437577457/web2.apac.globalroaming.com/var/www/secure/css/style.css",
 		"/tmp/sublime-sftp-browse-1437577236/web2.apac.globalroaming.com/var/www/secure/tplv3/ajax/home.tpl",
 		"/tmp/sublime-sftp-browse-1437576461/web2.apac.globalroaming.com/var/www/secure/tplv3/ajax/home.tpl",
@@ -466,9 +502,7 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE.orig",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/VersionCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/services.yml",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/Resources/config/bower/bower.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/AppBundle/DependencyInjection/AppExtension.php",
@@ -553,14 +587,7 @@
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/git-deployer.sublime-project",
 		"/home/beniwtv/Documents/CodeRepos/apiserver/apiserver.sublime-project",
 		"/home/beniwtv/Documents/Projects/translacia.com/translacia.sublime-project",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/ang-privacy.tpl",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/ang-index.tpl",
-		"/home/beniwtv/Documents/Projects/translacia.com/SCROLL&STRAP/index.html",
-		"/home/beniwtv/Documents/Projects/translacia.com/OLDHS",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/master.tpl",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciawebcontrollers.js",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/functions.js",
-		"/home/beniwtv/Documents/Projects/translacia.com/src/scripts/translaciaweb.js"
+		"/home/beniwtv/Documents/Projects/translacia.com/src/templates/ang-privacy.tpl"
 	],
 	"find":
 	{
@@ -571,6 +598,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 			"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js"
 		]
 	},
@@ -579,6 +607,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_saveDeploymentStatuses",
+			"_interactiveLogin",
+			"_getStorageServices",
+			"_getVCServices",
+			"_loadDeploymentStatuses",
+			"_createClient",
+			"_printHistory",
 			"delivery aaddress",
 			"\"na\"",
 			"\n        ",
@@ -634,6 +669,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"saveDeploymentStatuses",
+			"interactiveLogin",
+			"getStorageServices",
+			"getVCServices",
+			"loadDeploymentStatuse",
+			"createClient",
 			"icon-4x",
 			"icon",
 			""
@@ -647,7 +688,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -655,15 +696,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 949,
+						"buffer_size": 933,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								144,
-								144
+								505,
+								505
 							]
 						],
 						"settings":
@@ -677,6 +718,38 @@
 							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
 							"translate_tabs_to_spaces": false,
 							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2559,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								187,
+								187
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -733,7 +806,7 @@
 	},
 	"output.git-pull":
 	{
-		"height": 118.0
+		"height": 73.0
 	},
 	"output.git-push":
 	{
