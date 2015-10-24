@@ -72,7 +72,7 @@ class LocalStorage extends BaseStorage {
             $status->added(true);
             $this->deploymentStatuses[] = $status;
 
-            $this->_saveDeploymentStatuses();
+            $this->saveDeploymentStatuses();
         }
 
     }
@@ -106,7 +106,7 @@ class LocalStorage extends BaseStorage {
             unset($this->deploymentStatuses[$currentStatusObject]);
             $this->deploymentStatuses = array_values($this->deploymentStatuses);
 
-            $this->_saveDeploymentStatuses();
+            $this->saveDeploymentStatuses();
         }
 
     }
@@ -172,7 +172,7 @@ class LocalStorage extends BaseStorage {
     /**
      * Saves the deployment status file to disk
      */
-    private function _saveDeploymentStatuses() {
+    private function saveDeploymentStatuses() {
 
         $statuses = json_encode($this->deploymentStatuses);
 
