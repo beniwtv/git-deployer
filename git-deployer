@@ -10,6 +10,8 @@ use GitDeployer\Commands\ConfigCommand;
 use GitDeployer\Commands\AddCommand;
 use GitDeployer\Commands\RemoveCommand;
 use GitDeployer\Commands\InfoCommand;
+use GitDeployer\Commands\HistoryCommand;
+use GitDeployer\Commands\InitCommand;
 
 use Symfony\Component\Console\Application;
 
@@ -22,4 +24,6 @@ $deployer->add(new StatusCommand());
 $deployer->add(new AddCommand());
 $deployer->add(new RemoveCommand());
 $deployer->add(new InfoCommand());
+$deployer->add(new HistoryCommand());
+$deployer->add(new InitCommand());
 $deployer->run();

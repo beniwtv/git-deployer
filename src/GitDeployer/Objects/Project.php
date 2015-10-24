@@ -4,6 +4,13 @@ namespace GitDeployer\Objects;
 class Project extends BaseObject {
 
     /**
+     * The project's ID, as it appears
+     * on the Git service
+     * @var string
+     */
+    protected $id;
+
+    /**
      * The project's name, as it appears
      * on the Git service
      * @var string

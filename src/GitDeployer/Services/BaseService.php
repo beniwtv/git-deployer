@@ -37,6 +37,22 @@ class BaseService {
         throw new \Exception('You must override the login() method in your service!');
     }
 
+    /**
+     * Method to override in child services
+     * @return array of \GitDeployer\Objects\Project
+     */
+    public function getProjects($url = null) {
+        throw new \Exception('You must override the getProjects() method in your service!');
+    }
+
+    /**
+     * Method to override in child services
+     * @return array of \GitDeployer\Objects\History
+     */
+    public function getHistory(\GitDeployer\Objects\Project $project, $url = null) {
+        throw new \Exception('You must override the getHistory() method in your service!');
+    }
+
     //////////////////////////////////////////////////////////////////
     // Helpers
     //////////////////////////////////////////////////////////////////

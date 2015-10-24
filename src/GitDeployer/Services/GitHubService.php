@@ -69,7 +69,8 @@ class GitHubService extends BaseService {
 
                 $projects = array_map( function ($p) {
                     $project = new \GitDeployer\Objects\Project();
-                    $project->name($p->name)
+                    $project->id($p->id)
+                            ->name($p->name)
                             ->description($p->description)
                             ->url($p->clone_url)
                             ->homepage($p->html_url);
@@ -93,6 +94,68 @@ class GitHubService extends BaseService {
                 }
 
                 return $projects;
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 401
+                    || $e->getResponse()->getStatusCode() == 403) {
+                    return $this->_interactiveLogin();
+                } else {
+                    throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+                }
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
+
+    }
+
+    /**
+     * Get a list of history items for a project from GitHub
+     * @return array of \Git-Deployer\Objects\History
+     */
+    public function getHistory(\GitDeployer\Objects\Project $project, $url = 'repos/:user/:repo/commits') {
+
+        if (strlen($this->token) > 0) {
+            $client = $this->_createClient($this->token);
+
+            try {
+                preg_match('#.*\/(.*)\/.*\.git#iu', $project->url(), $matches);
+
+                $url = str_replace(':user', $matches[1], $url);
+                $url = str_replace(':repo', $project->name(), $url);
+
+                $response = $client->get($url);
+                $historyData = json_decode($response->getBody());
+
+                $historyData = array_map( function ($h) use ($project) {
+                    $history = new \GitDeployer\Objects\History();
+                    $history->projectname($project->name())
+                            ->commit($h->sha)
+                            ->author($h->commit->committer->name)
+                            ->authormail($h->commit->committer->email)
+                            ->date($h->commit->committer->date)
+                            ->message($h->commit->message);
+
+                    return $history;
+                }, $historyData);
+
+                $cleanLink = null;
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+
+                    preg_match('/<.*user\/repos(.*)>; rel="next"/', $link, $matches);
+
+                    if (isset($matches[1])) {
+                        $cleanLink = 'repos/:user/:repo/commits' . $matches[1];                        
+                    }
+                }
+
+                return array(
+                    $cleanLink,
+                    $historyData
+                );
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
