@@ -18,6 +18,20 @@ class Project extends BaseObject {
     protected $name;
 
     /**
+     * The name space, i.e. "organization" or
+     * "user" of the project on the Git service
+     * @var string
+     */
+    protected $namespace;
+
+    /**
+     * The default branch of this Git repository
+     * as configured on the Git service
+     * @var string
+     */
+    protected $defaultBranch;
+
+    /**
      * The project's description, as it appears
      * on the Git service
      * @var string

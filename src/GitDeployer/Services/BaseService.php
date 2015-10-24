@@ -53,6 +53,14 @@ class BaseService {
         throw new \Exception('You must override the getHistory() method in your service!');
     }
 
+    /**
+     * Method to override in child services
+     * @return array of \GitDeployer\Objects\Tag
+     */
+    public function getTags(\GitDeployer\Objects\Project $project, $url = null) {
+        throw new \Exception('You must override the getTags() method in your service!');
+    }
+
     //////////////////////////////////////////////////////////////////
     // Helpers
     //////////////////////////////////////////////////////////////////

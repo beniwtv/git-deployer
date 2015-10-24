@@ -76,9 +76,11 @@ class GitLabService extends BaseService {
                     $project = new \GitDeployer\Objects\Project();
                     $project->id($p->id)
                             ->name($p->name)
+                            ->namespace($p->namespace->path)
                             ->description($p->description)
                             ->url($p->http_url_to_repo)
-                            ->homepage($p->web_url);
+                            ->homepage($p->web_url)
+                            ->defaultBranch($p->default_branch);
 
                     return $project;
                 }, $projects);
@@ -153,6 +155,59 @@ class GitLabService extends BaseService {
                     $cleanLink,
                     $historyData
                 );
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 401
+                    || $e->getResponse()->getStatusCode() == 403) {
+                    return $this->_interactiveLogin();
+                } else {
+                    throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+                }
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
+
+    }
+
+    /**
+     * Get a list of tag items for a project from GitLab
+     * @return array of \Git-Deployer\Objects\Tag
+     */
+    public function getTags(\GitDeployer\Objects\Project $project, $url = 'projects/:id/repository/tags') {
+
+        if (strlen($this->privateKey) > 0) {
+            $client = $this->_createClient($this->privateKey);
+
+            try {
+                $url = str_replace(':id', $project->id(), $url);
+
+                $response = $client->get($url);
+                $tagData = json_decode($response->getBody());
+
+                $tagData = array_map( function ($t) {
+                    $tag = new \GitDeployer\Objects\Tag();
+                    $tag->name($t->name())
+                        ->commit($h->commit->id);
+                        
+                    return $tag;
+                }, $tagData);
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+
+                    preg_match('/<.*projects\/.*\/repository/tags(.*)>; rel="next"/', $link, $matches);
+
+                    if (isset($matches[1])) {
+                        $cleanLink = 'projects/:id/repository/tags' . $matches[1];                        
+
+                        $moreTags = $this->getTags($project, $cleanLink);
+                        if (is_array($moreTags)) $tagData = array_merge($tagData, $moreTags);
+                    }
+                }
+
+                return $tagData;
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {

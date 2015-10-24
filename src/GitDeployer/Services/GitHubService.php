@@ -71,9 +71,11 @@ class GitHubService extends BaseService {
                     $project = new \GitDeployer\Objects\Project();
                     $project->id($p->id)
                             ->name($p->name)
+                            ->namespace(str_replace('/' . $p->name, '', $p->full_name))
                             ->description($p->description)
                             ->url($p->clone_url)
-                            ->homepage($p->html_url);
+                            ->homepage($p->html_url)
+                            ->defaultBranch($p->default_branch);;
 
                     return $project;
                 }, $projects);
@@ -112,15 +114,13 @@ class GitHubService extends BaseService {
      * Get a list of history items for a project from GitHub
      * @return array of \Git-Deployer\Objects\History
      */
-    public function getHistory(\GitDeployer\Objects\Project $project, $url = 'repos/:user/:repo/commits') {
+    public function getHistory(\GitDeployer\Objects\Project $project, $url = 'repos/:namespace/:repo/commits') {
 
         if (strlen($this->token) > 0) {
             $client = $this->_createClient($this->token);
 
             try {
-                preg_match('#.*\/(.*)\/.*\.git#iu', $project->url(), $matches);
-
-                $url = str_replace(':user', $matches[1], $url);
+                $url = str_replace(':namespace', $project->namespace(), $url);
                 $url = str_replace(':repo', $project->name(), $url);
 
                 $response = $client->get($url);
@@ -145,10 +145,10 @@ class GitHubService extends BaseService {
                     // page link and pass it to getProjects() again
                     $link = $response->getHeader('link')[0];
 
-                    preg_match('/<.*user\/repos(.*)>; rel="next"/', $link, $matches);
+                    preg_match('/<.*repos.*\/commits(.*)>; rel="next"/', $link, $matches);
 
                     if (isset($matches[1])) {
-                        $cleanLink = 'repos/:user/:repo/commits' . $matches[1];                        
+                        $cleanLink = 'repos/:namespace/:repo/commits' . $matches[1];                        
                     }
                 }
 
@@ -156,6 +156,60 @@ class GitHubService extends BaseService {
                     $cleanLink,
                     $historyData
                 );
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 401
+                    || $e->getResponse()->getStatusCode() == 403) {
+                    return $this->_interactiveLogin();
+                } else {
+                    throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
+                }
+            }
+        } else {
+            throw new \Exception('You must log-in to a service first!');            
+        }
+
+    }
+
+    /**
+     * Get a list of tag items for a project from GitHub
+     * @return array of \Git-Deployer\Objects\Tag
+     */
+    public function getTags(\GitDeployer\Objects\Project $project, $url = 'repos/:namespace/:repo/tags') {
+
+        if (strlen($this->token) > 0) {
+            $client = $this->_createClient($this->token);
+
+            try {
+                $url = str_replace(':namespace', $project->namespace(), $url);
+                $url = str_replace(':repo', $project->name(), $url);
+
+                $response = $client->get($url);
+                $tagData = json_decode($response->getBody());
+
+                $tagData = array_map( function ($t) {
+                    $tag = new \GitDeployer\Objects\Tag();
+                    $tag->name($t->name())
+                        ->commit($h->commit->sha);
+                        
+                    return $tag;
+                }, $tagData);
+
+                if ($response->hasHeader('link')) {
+                    // -> We have more than one page, extract the next
+                    // page link and pass it to getProjects() again
+                    $link = $response->getHeader('link')[0];
+
+                    preg_match('/<.*repos.*\/tags(.*)>; rel="next"/', $link, $matches);
+
+                    if (isset($matches[1])) {
+                        $cleanLink = 'repos/:namespace/:repo/tags' . $matches[1];                        
+
+                        $moreTags = $this->getTags($project, $cleanLink);
+                        if (is_array($moreTags)) $tagData = array_merge($tagData, $moreTags);
+                    }
+                }
+
+                return $tagData;
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
