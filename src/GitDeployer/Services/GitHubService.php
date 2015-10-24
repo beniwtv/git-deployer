@@ -37,18 +37,18 @@ class GitHubService extends BaseService {
             $client = $this->createClient($this->token);
 
             try {
-                $response = $client->get('user');
+                $client->get('user');
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 // Login no longer valid?                
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
             }
         } else {
-            return $this->_interactiveLogin();
+            return $this->interactiveLogin();
         }
 
     }
@@ -98,7 +98,7 @@ class GitHubService extends BaseService {
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
@@ -158,7 +158,7 @@ class GitHubService extends BaseService {
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
@@ -212,7 +212,7 @@ class GitHubService extends BaseService {
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
@@ -256,7 +256,7 @@ class GitHubService extends BaseService {
      * Logs into GitLab with user/password
      * @return boolean
      */
-    private function _interactiveLogin() {
+    private function interactiveLogin() {
 
         // -> Display some help on how to create a private access key
         $this->output->writeln(<<<HELP

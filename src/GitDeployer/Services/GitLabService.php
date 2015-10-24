@@ -43,18 +43,18 @@ class GitLabService extends BaseService {
             $client = $this->createClient($this->privateKey);
 
             try {
-                $response = $client->get('projects');
+                $client->get('projects');
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 // Login no longer valid?                
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
             }
         } else {
-            return $this->_interactiveLogin();
+            return $this->interactiveLogin();
         }
 
     }
@@ -158,7 +158,7 @@ class GitLabService extends BaseService {
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
@@ -211,7 +211,7 @@ class GitLabService extends BaseService {
             } catch (\GuzzleHttp\Exception\ClientException $e) {
                 if ($e->getResponse()->getStatusCode() == 401
                     || $e->getResponse()->getStatusCode() == 403) {
-                    return $this->_interactiveLogin();
+                    return $this->interactiveLogin();
                 } else {
                     throw new \Exception($e->getResponse()->getStatusCode() . ' ' . $e->getResponse()->getReasonPhrase());            
                 }
@@ -253,7 +253,7 @@ class GitLabService extends BaseService {
      * Logs into GitLab with user/password
      * @return boolean
      */
-    private function _interactiveLogin() {
+    private function interactiveLogin() {
 
         $helper = $this->helpers->get('question');
         
