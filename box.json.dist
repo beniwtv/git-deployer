@@ -5,11 +5,13 @@
         "vendor"
     ],
     "files": [
-        "LICENSE"
+        "LICENSE",
+        "stuff/deployerfile.json.template"
     ],
     "main": "bin/git-deployer",
     "output": "git-deployer.phar",
     "git-version": "package_version",
     "stub": true,
-    "key": "<PGP key fle here>"
+    "key": "<PGP key fle here>",
+    "key-pass": true
 }
