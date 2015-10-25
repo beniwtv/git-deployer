@@ -17,15 +17,11 @@ class InitCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         
-        // -> Get logged-in service       
-        $instance = \GitDeployer\AppInstance::getInstance();
-        $appService = $instance->service();
-        $appService->setInstances($input, $output, $this->getHelperSet());
-
         if (getcwd()) {
             if (\Gitonomy\Git\Admin::isValidRepository(getcwd())) {
                 // Repo is valid, drop the bare example file there
-                
+                copy(__DIR__ . '/../../../stuff/deployerfile.json.template', getcwd() . '/deployerfile');
+                $output->writeln('Repository initialized!');
             } else {
                 throw new \Exception('"' . getcwd() . '" does not appear to contain a Git repository!');
             }
