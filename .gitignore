@@ -4,3 +4,4 @@ startup.sh
 git-deployer.phar
 bin/git-deployer.pubkey
 box.json
+private.key
