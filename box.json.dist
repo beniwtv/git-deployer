@@ -10,5 +10,6 @@
     "main": "bin/git-deployer",
     "output": "git-deployer.phar",
     "git-version": "package_version",
-    "stub": true
+    "stub": true,
+    "key": "<PGP key fle here>"
 }
