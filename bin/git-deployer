@@ -13,6 +13,7 @@ use GitDeployer\Commands\InfoCommand;
 use GitDeployer\Commands\HistoryCommand;
 use GitDeployer\Commands\InitCommand;
 use GitDeployer\Commands\SelfUpdateCommand;
+use GitDeployer\Commands\DeployCommand;
 
 use Symfony\Component\Console\Application;
 
@@ -28,4 +29,5 @@ $deployer->add(new InfoCommand());
 $deployer->add(new HistoryCommand());
 $deployer->add(new InitCommand());
 $deployer->add(new SelfUpdateCommand());
+$deployer->add(new DeployCommand());
 $deployer->run();
