@@ -328,22 +328,14 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     95a0a12 More fixes\n\n\nChanges:\n	Modified   README.md\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     0190038 Badges!\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 933,
+				"buffer_size": 942,
 				"line_ending": "Unix",
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
 				"scratch": true
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 2559,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -354,10 +346,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 138.0,
-		"last_filter": "push",
+		"height": 392.0,
+		"last_filter": "pu",
 		"selected_items":
 		[
+			[
+				"pu",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
 			[
 				"push",
 				"Git: Push"
@@ -373,10 +373,6 @@
 			[
 				"pus",
 				"Git: Push"
-			],
-			[
-				"comm",
-				"Git: Commit"
 			],
 			[
 				"commit",
@@ -460,6 +456,7 @@
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/HistoryCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/AddCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InfoCommand.php",
@@ -476,7 +473,6 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects/BaseObject.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LogoutCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/AppInstance.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/RemoveCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InitCommand.php",
@@ -688,7 +684,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -696,15 +692,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 933,
+						"buffer_size": 942,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								505,
-								505
+								137,
+								137
 							]
 						],
 						"settings":
@@ -718,38 +714,6 @@
 							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
 							"translate_tabs_to_spaces": false,
 							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2559,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								187,
-								187
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

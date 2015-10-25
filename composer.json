@@ -3,6 +3,23 @@
     "license": "MIT",
     "type": "project",
     "description": "Deploys projects from Git, via configurable plugins.",
+     "authors": [
+        {
+            "name": "Benedikt Bär",
+            "email": "beniwtv@relamp.tk",
+            "role": "Developer"
+        },
+        {
+            "name": "Relamp.tk Opensource Team",
+            "email": "info@relamp.tk",
+            "homepage": "http://www.relamp.tk",
+            "role": "Managing Organisation"
+        }
+    ],
+    "support": {
+        "email": "info@relamp.tk",
+        "irc": "irc://irc.freenode.org/relamp.tk"
+    },
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -11,7 +28,8 @@
         "symfony/console": "2.7.*",
         "dnoegel/php-xdg-base-dir": "^0.1.0",
         "guzzlehttp/guzzle": "~6.0",
-        "gitonomy/gitlib": "dev-master"
+        "gitonomy/gitlib": "dev-master",
+        "padraic/phar-updater": "~1.0.2"
     },
     "minimum-stability": "stable"   
 }
