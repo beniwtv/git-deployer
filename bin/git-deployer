@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use GitDeployer\Commands\LoginCommand;
 use GitDeployer\Commands\LogoutCommand;
@@ -12,6 +12,7 @@ use GitDeployer\Commands\RemoveCommand;
 use GitDeployer\Commands\InfoCommand;
 use GitDeployer\Commands\HistoryCommand;
 use GitDeployer\Commands\InitCommand;
+use GitDeployer\Commands\SelfUpdateCommand;
 
 use Symfony\Component\Console\Application;
 
@@ -26,4 +27,5 @@ $deployer->add(new RemoveCommand());
 $deployer->add(new InfoCommand());
 $deployer->add(new HistoryCommand());
 $deployer->add(new InitCommand());
+$deployer->add(new SelfUpdateCommand());
 $deployer->run();
