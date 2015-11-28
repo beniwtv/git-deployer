@@ -5,6 +5,9 @@
 Git-Deployer
 ============
 
+**WARNING: This software is currently in development. No stable releases have 
+come out yet. In addition, the deploy process does not yet fully work!**
+
 Welcome to Git-Deployer! Git-Deployer is a tool which you can use to manage
 your deployments from Git repositories.
 
@@ -95,12 +98,48 @@ how to deploy your project. For that, execute the init command in the root of yo
 git-deployer init
 ```
 
-<To be continued...>
+Once you have your .deployerfile, make sure to configure it according to your needs.
+An explanation of the configuration of this file can be found by executing:
 
+```
+git-deployer help init
+```
 
-4) More!
+Once you are ready, start the deployment with the deploy command, for example:
+
+```
+git-deployer deploy <projectname> tag:v1.0.0
+```
+
+Optionally, you can pass a specific configuration section of your .deployerfile:
+
+```
+git-deployer deploy <projectname> tag:v1.0.0 -c <configuration>
+```
+
+Enjoy!
+
+4) About "Deployers"
+--------------------
+
+Deployers are plugins for Git-Deployer that allow you to modify how a project is deployed
+to a server. The deployer to use can be set ona project by project basis, in the .deployerfile.
+
+To check which deployers have been integrated into your build of Git-Deployer, execute:
+
+```
+git-deployer help init
+```
+
+To get help about a specific deployer, execute:
+
+```
+git-deployer help deploy <deployer>
+```
+
+5) More!
 --------
 
-See git-deployer -h for more commands!
+See git-deployer -h for more commands and help!
 
 [1]: https://github.com/git-deployer

@@ -1,3 +1,16 @@
 {
-    
+    "type": "<deployer type>",
+    "configurations": {
+        "production": {
+            "exampledeployerparam": "%exampleparam%",
+            "anotherdeployerparam": "Value for production"
+        },
+        "staging": {
+            "anotherdeployerparam": "Value overriden for staging"
+        }
+    },
+    "inheritance": ["staging", "production"],
+    "parameters": {
+        "exampleparam": "Example param question description?"
+    }
 }

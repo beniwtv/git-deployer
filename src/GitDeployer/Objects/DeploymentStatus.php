@@ -43,7 +43,7 @@ class DeploymentStatus extends BaseObject {
      * @return string
      */
     public function getDeployedVersion() {
-        return ($this->isDeployd() ? $deployedType . ':' . $deployedString : 'N/A');
+        return ($this->isDeployd() ? $this->deployedType . ':' . $this->deployedString : 'N/A');
     }
 
     /**

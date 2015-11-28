@@ -24,8 +24,41 @@ class LocalStorage extends BaseStorage {
     }
 
     /**
+     * Sets the deployment status of the requested project, and loads the
+     * status file if not already done so
+     * @param \GitDeployer\Objects\Project          $project The project to update
+     * @param \GitDeployer\Objects\DeploymentStatus $status  The actual status of the project
+     */
+    public function setDeploymentStatus(\GitDeployer\Objects\Project $project, \GitDeployer\Objects\DeploymentStatus $status) {
+
+        // -> Load status file, if not done so yet
+        $this->loadDeploymentStatuse();
+
+        // -> Check if we already have a status object
+        // that matches our project
+        $currentStatusObject = null;
+
+        foreach ($this->deploymentStatuses as $key => $existingstatus) {
+            if ($status->project() == $project->name()) {
+                $currentStatusObject            = $status;
+                $this->deploymentStatuses[$key] = $status;
+            }
+        }
+
+        // -> If we have no status object yet, return an error, since something
+        // obviously went wron when adding a status
+        if ($currentStatusObject == null) {
+            throw new \Exception('No existing status for project "' . $project->name() . '"! Did you forget to add it to Git-Deployer?');     
+        }
+
+        $this->saveDeploymentStatuses();
+
+    }
+
+    /**
      * Gets the deployment status of the requested project, and loads the
      * status file if not already done so
+     * @param  \GitDeployer\Objects\Project $project The project to update
      * @return \GitDeployer\Objects\DeploymentStatus
      */
     public function getDeploymentStatus(\GitDeployer\Objects\Project $project) {
