@@ -41,7 +41,7 @@ class BaseDeployer {
      * Method to override in child services
      * @return mixed
      */
-    public function deploy(\GitDeployer\Objects\Project $project, $gitpath) {
+    public function deploy(\GitDeployer\Objects\Project $project, $gitpath, $config) {
         throw new \Exception('You must override the deploy() method in your service!');
     }
 
@@ -122,6 +122,25 @@ class BaseDeployer {
         }, $deployers);
 
         return array_filter($deployers);
+
+    }
+
+    /**
+     * Shows a message on the terminal
+     * @param  string          $section  "Section" for the message
+     * @param  string          $message  The message to display
+     * @param  OutputInterface $output   The Symfony output interface
+     */
+    protected function showMessage($section, $message, $output, $style = 'info') {
+
+        $formatter = $this->helpers->get('formatter');
+        $formattedLine = $formatter->formatSection(
+            str_pad($section, 6, ' ', STR_PAD_LEFT),
+            $message,
+            $style
+        );
+
+        $output->writeln($formattedLine);
 
     }
 

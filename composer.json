@@ -3,7 +3,7 @@
     "license": "MIT",
     "type": "project",
     "description": "Deploys projects from Git, via configurable plugins.",
-     "authors": [
+    "authors": [
         {
             "name": "Benedikt Bär",
             "email": "beniwtv@relamp.tk",
@@ -25,12 +25,15 @@
     },
     "require": {
         "php": ">=5.5",
-        "symfony/console": "2.7.*",
+        "symfony/console": "3.0.*",
         "dnoegel/php-xdg-base-dir": "^0.1.0",
         "guzzlehttp/guzzle": "~6.1",
-        "gitonomy/gitlib": "dev-master",
+        "gitonomy/gitlib": "1.0.*",
         "padraic/phar-updater": "~1.0.2",
-        "stage1/docker-php": "@dev"    
+        "stage1/docker-php": "@dev"
+    },
+    "suggest": {
+        "ext-expect": "For creating SSH tunnels to your docker tcp streams"
     },
     "minimum-stability": "stable"   
 }

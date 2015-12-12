@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class DeployCommand extends Command {
     
@@ -54,6 +56,16 @@ HELP;
                 'c',
                 InputOption::VALUE_OPTIONAL,
                 'Which configuration do you want to use for the deployment?'
+            )->addOption(
+                'bag',
+                'b',
+                InputOption::VALUE_OPTIONAL,
+                'Which saved parameter bag do you want to use for the deployment?'
+            )->addOption(
+                'force-redeploy',
+                'f',
+                InputOption::VALUE_NONE,
+                'Don\'t ask for confirmation when re-deploying the same version'
             )->setHelp($helpText);
 
     }
@@ -63,6 +75,8 @@ HELP;
         $repository = $input->getArgument('repository');
         $revision = $input->getArgument('revision');
         $configuration = $input->getOption('configuration');
+        $bag = $input->getOption('bag');
+        $force = $input->getOption('force-redeploy');
 
         // -> Check that the revision matches what we expect
         preg_match('#^(tag|branch|rev):(.*)#iu' , $revision, $matches);
@@ -99,11 +113,9 @@ HELP;
                 // -> Check we are not deploying the same version again. Ask
                 // if we do, so the user can decide 
                 if ($status->isDeployd()) {
-                    if ($status->getDeployedVersion() == $revision) {
-                        $continue = false; 
-
+                    if ($status->getDeployedVersion() == $revision && !$force) {
                         $helper     = $this->getHelper('question');
-                        $question   = new ConfirmationQuestion('Version ' . $status->getDeployedVersion() . ' was already deployed on ' . $status->deployedWhen() . '. Continue anyway? (y/n) ', false);
+                        $question   = new ConfirmationQuestion('Version ' . $status->getDeployedVersion() . ' was already deployed on ' . $status->deployedWhen() . '. Continue anyway? (y/[n]) ', false);
 
                         if (!$helper->ask($input, $output, $question)) {
                             break;
@@ -118,7 +130,7 @@ HELP;
                     $this->showMessage('GIT', 'Pulling latest changes from repository...', $output);
 
                     $repository = \Gitonomy\Git\Admin::init($tmpDir, false);
-                    $repository->run('pull');
+                    //$repository->run('pull');
                 } else {
                     $this->showMessage('GIT', 'Cloning repository...', $output);
                     $repository = \Gitonomy\Git\Admin::cloneTo($tmpDir, $project->url(), false);
@@ -128,7 +140,7 @@ HELP;
                 $this->showMessage('GIT', 'Checking out ' . $revision . '...', $output);                
                 
                 $wc = $repository->getWorkingCopy();
-                $wc->checkout($version);
+                //$wc->checkout($version);
 
                 // -> Open .deployerfile and parse it
                 $this->showMessage('DEPLOY', 'Checking .deployerfile...', $output);
@@ -153,24 +165,193 @@ HELP;
                     throw new \Exception('Could not parse .deployerfile: ' . "\n" . 'Please specify at least one deployment configuration in the "configurations" option!');
                 }
 
-                // -> Merge the current configuration inheritance chain, if any
-                if (count(get_object_vars($deployerfile->configurations)) > 1) {
+                // -> Get available configurations, and if not set, ask the user 
+                // which configuration to use
+                $configs = get_object_vars($deployerfile->configurations);
+
+                if ($configuration == null && count(get_object_vars($deployerfile->configurations)) > 1) {
                     // If no configuration has been specified via command line,
                     // ask the user which one to use
-                    if ($configuration == null) {
-                        $continue = false; 
+                    $confignames = array();
 
-                        $helper     = $this->getHelper('question');
-                        $question   = new ConfirmationQuestion('Version ' . $status->getDeployedVersion() . ' was already deployed on ' . $status->deployedWhen() . '. Continue anyway? (y/n)', false);
+                    foreach ($configs as $name => $values) {
+                        $confignames[] = $name;
+                    }
 
-                        if (!$helper->ask($input, $output, $question)) {
-                            break;
+                    // -> Get storage service to use
+                    $question = new ChoiceQuestion('Which deployment configuration would you like to use?', $confignames);
+                    $question->setValidator(function ($answer) use($configs, $confignames) {
+                        if (!isset($configs[$confignames[$answer]])) {
+                            throw new \RuntimeException(
+                                'Please select a correct value!'
+                            );
+                        }
+
+                        return $confignames[$answer];
+                    });
+
+                    $configuration = $helper->ask($input, $output, $question);
+                } elseif ($configuration != null) {
+                    // Try to use the current specified configuration
+                    if (!isset($configs[$configuration])) {
+                        throw new \Exception('The configuration "' . $configuration . '" was not found in this .deployefile!');
+                    }
+                } else {
+                    foreach ($configs as $name => $values) {
+                        $configuration = $name;
+                    }
+                }            
+
+                // -> Merge the current configuration inheritance chain, if any                
+                if (!isset($deployerfile->inheritance)) {
+                    $mergedConfig = json_decode(json_encode($configs[$configuration]), true);
+                } else {
+                    $chain          = $deployerfile->inheritance;
+                    $minChainFound  = false; 
+                    $smallerChain   = array();
+
+                    foreach ($chain as $key) {
+                        if ($key == $configuration) {
+                            $minChainFound  = true;
+                            $smallerChain[] = $key;
+                        } else {
+                            if ($minChainFound) $smallerChain[] = $key;
                         }
                     }
-                }       
 
+                    if (count($smallerChain) > 1) {
+                        $mergedConfig = array();
+
+                        foreach (array_reverse($smallerChain) as $configmerge) {
+                            $mergedConfig = array_replace_recursive($mergedConfig, json_decode(json_encode($configs[$configmerge]), true));
+                        }
+                    } else {
+                        $mergedConfig = json_decode(json_encode($configs[$smallerChain[0]]), true);                       
+                    }
+                }
+
+                // -> Check if we have saved parameter bags, and offer the user
+                // to choose one if so, or use the one provided from the command line
+                $xdg = new \XdgBaseDir\Xdg();
+                $bagPath = $xdg->getHomeConfigDir() . '/git-deployer';
+
+                if ($bag != null) {
+                    if (!file_exists($bagPath . '/' . $project->name() . '-' . $bag . '.bag')) {
+                        throw new \Exception('This parameter bag has not been found!' . "\n" . 'Please check your naming!');
+                    } else {
+                        $answers = unserialize(file_get_contents($bagPath . '/' . $project->name() . '-' . $bag . '.bag'));
+                    }
+                } else {                    
+                    $availableBags = array();
+
+                    if (file_exists($bagPath)) {
+                        $dh = opendir($bagPath);
+
+                        while (($file = readdir($dh)) !== false) {
+                            $fileInfo = pathinfo($file);
+
+                            if ($fileInfo['extension'] == 'bag') {
+                                if (stristr($fileInfo['filename'], $project->name())) {
+                                    $availableBags[] = str_replace($project->name() . '-', '', $fileInfo['filename']);
+                                }
+                            }
+                        }
+
+                        closedir($dh);
+                    }
+
+                    if (count($availableBags) > 0) {
+                        array_unshift($availableBags, "Don't use a bag");
+
+                        $helper = $this->getHelper('question');
+
+                        $question = new ChoiceQuestion('One or more parameter bags have been found. Which one do you want to use?', $availableBags);
+                        $question->setValidator(function ($answer) use($availableBags) {
+                            if ($answer == 0) return false;
+                            if (!isset($availableBags[$answer])) {
+                                throw new \RuntimeException(
+                                    'Please select a correct value!'
+                                );
+                            }
+
+                            return $availableBags[$answer];
+                        });
+
+                        $parameterBag = $helper->ask($input, $output, $question);
+
+                        if ($parameterBag) {
+                            $answers = unserialize(file_get_contents($bagPath . '/' . $project->name() . '-' . $parameterBag . '.bag'));
+                        } else {
+                            $answers = array();
+                        }
+                    } else {
+                        $answers = array();
+                    }
+                }
+
+                // -> Replace placeholders in our config using parameter bags
+                $bagModified = false;
+
+                if (isset($deployerfile->parameters)) {
+                    foreach ($deployerfile->parameters as $key => $questionhelp) {
+                        if (!isset($answers[$key]) || strlen($answers[$key]) < 0) {
+                            $helper = $this->getHelper('question');
+
+                            $question = new Question($questionhelp . ' ');
+                            $question->setValidator(function ($answer) {
+                                if (strlen($answer) < 1) {
+                                    throw new \RuntimeException(
+                                        'Please provide an answer for this question!'
+                                    );
+                                }
+
+                                return $answer;
+                            });
+
+                            $answers[$key] = $helper->ask($input, $output, $question);
+                            $bagModified = true;
+                        }
+                    }
+
+                    // -> Ask the user to save this parameter bag
+                    if ($bagModified) {
+                        $helper     = $this->getHelper('question');
+                        $question   = new ConfirmationQuestion('Do you want to save these answers in a parameter bag for next time? ([y]/n) ', true);
+
+                        if ($helper->ask($input, $output, $question)) {
+                            $question = new Question('Please provide a name for the new (or existing, will overwrite) parameter bag: ');
+                            $question->setValidator(function ($answer) {
+                                if (strlen($answer) < 1) {
+                                    throw new \RuntimeException('Please provide a name for this parameter bag!');
+                                } else {
+                                    if (!preg_match('#\w+#iu' , $answer)) {
+                                        throw new \RuntimeException('The name provided for this parameter bag is invalid!');
+                                    }
+                                }
+
+                                return $answer;
+                            });
+
+                            $bagname = $helper->ask($input, $output, $question);
+
+                            // -> Save this bag!
+                            $xdg = new \XdgBaseDir\Xdg();
+                            $savePath = $xdg->getHomeConfigDir() . '/git-deployer';
+                            $saveFile = $savePath . '/' . $project->name() . '-' . $bagname . '.bag';
+
+                            if (!file_exists($savePath)) mkdir($savePath);
+                            file_put_contents($saveFile, serialize($answers));
+                        }
+                    }
+
+                    // -> Now traverse the array to replace the values, and as such
+                    // get our merged config ready to pass it into the deployer
+                    $replacedConfig = $this->replacePlaceholders($mergedConfig, $answers);
+                }
+
+                // -> Execute the requested deployer with our merged configuration array
                 $deployer = \GitDeployer\Deployers\BaseDeployer::createServiceInstance(ucwords($deployerfile->type), $input, $output, $this->getHelperSet());
-                list($statusok, $trace) = $deployer->deploy($project, $tmpDir);
+                list($statusok, $trace) = $deployer->deploy($project, $tmpDir, $replacedConfig);
 
                 // -> Check if the deployment went well, return any errors,
                 // or update the deployment status for the project otherwise
@@ -210,6 +391,33 @@ HELP;
         );
 
         $output->writeln($formattedLine);
+
+    }
+
+    /**
+     * Replaces placeholders in the config with their values
+     * @param  mixed $object       The object to replace placeholders in
+     * @param  array $replacements The placeholders & values to replace
+     * @return mixed
+     */
+    private function replacePlaceholders($object, $replacements) {
+
+        // Get our keys & replacements
+        $keys = array_map(function ($m) {
+            return '%' . $m . '%';
+        }, array_keys($replacements));
+
+        $replaces = array_values($replacements);
+
+        foreach ($object as $key => $value) {
+            if (is_array($value)) {
+                $object[$key] = $this->replacePlaceholders($value, $replacements);
+            } else {
+                $object[$key] = str_replace($keys, $replaces, $value);
+            }
+        }
+
+        return $object;
 
     }
 
