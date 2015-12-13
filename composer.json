@@ -27,10 +27,10 @@
         "php": ">=5.5",
         "symfony/console": "3.0.*",
         "dnoegel/php-xdg-base-dir": "^0.1.0",
-        "guzzlehttp/guzzle": "~6.1",
+        "guzzlehttp/guzzle": "~4.1",
         "gitonomy/gitlib": "1.0.*",
         "padraic/phar-updater": "~1.0.2",
-        "stage1/docker-php": "@dev"
+        "stage1/docker-php": "~0.4.0"
     },
     "suggest": {
         "ext-expect": "For creating SSH tunnels to your docker tcp streams"
