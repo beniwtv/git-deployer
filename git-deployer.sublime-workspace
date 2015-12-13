@@ -332,14 +332,11 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:beniwtv/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     9d437bc Beginnings of deploy command (WIP)\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 969,
-				"line_ending": "Unix",
-				"name": "*git-status*: git-deployer",
-				"read_only": true,
-				"scratch": true
+				"buffer_size": 3890,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -350,10 +347,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "pus",
+		"height": 138.0,
+		"last_filter": "push",
 		"selected_items":
 		[
+			[
+				"push",
+				"Git: Push Current Branch"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			],
 			[
 				"pus",
 				"Git: Push"
@@ -367,15 +376,7 @@
 				"Git: Status"
 			],
 			[
-				"push",
-				"Git: Push Current Branch"
-			],
-			[
 				"commit",
-				"Git: Commit"
-			],
-			[
-				"comm",
 				"Git: Commit"
 			],
 			[
@@ -385,10 +386,6 @@
 			[
 				"com",
 				"Git: Commit"
-			],
-			[
-				"pull",
-				"Git: Pull"
 			],
 			[
 				"stats",
@@ -465,16 +462,16 @@
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json.dist",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/bin/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/stuff/deployerfile.json.template",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InitCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json.dist",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/SelfUpdateCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/gitonomy/gitlib/doc/api/commit.rst",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/build.sh",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
@@ -698,31 +695,27 @@
 			[
 				{
 					"buffer": 0,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 969,
+						"buffer_size": 3890,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								271,
-								271
+								741,
+								741
 							]
 						],
 						"settings":
 						{
-							"__vi_external_disable": true,
-							"draw_white_space": "none",
-							"git_repo": "/home/beniwtv/ownCloud/Projects/git-deployer",
-							"git_status": true,
-							"git_view": "status",
 							"incomplete_sync": null,
-							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

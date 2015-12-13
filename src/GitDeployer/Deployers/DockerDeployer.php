@@ -63,6 +63,8 @@ HELP;
      */
     public function deploy(\GitDeployer\Objects\Project $project, $gitpath, $config) {
 
+        $useTunnel = false;
+
         // -> Connect to the docker daemon on a tcp or unix socket
         if (!isset($config['host']) || strlen($config['host']) < 1) $config['host'] = getenv('DOCKER_HOST');
         if (strlen($config['host']) < 1) throw new \Exception('Neither the "host" parameter was specified in the .deployer file nor is the DOCKER_HOST environment variable set!');
@@ -71,12 +73,15 @@ HELP;
             // Setting the docker host to tcp:// may enable usage of the SSH tunnel functionality
             if (isset($config['ssh']) && is_array($config['ssh'])) {
                 if (isset($config['ssh']['tunnel']) && $config['ssh']['tunnel'] == true) {
+                    $useProc = false;
+                    $useTunnel = true;
+
                     parent::showMessage('DOCKER', 'Connecting to Docker daemon via SSH...', $this->output);
 
                     // Check if the ssh binary is executable, else bail out
                     // since we can't open a tunnel without it
-                    if (!$this->command_exists('ssh') || !extension_loaded('expect')) {
-                        throw new \Exception('SSH client not found: Please make sure the "ssh" command is available, and that you have installed the PHP expect extension!');
+                    if (!$this->command_exists('ssh')) {
+                        throw new \Exception('SSH client not found: Please make sure the "ssh" command is available, and in your $PATH!');
                     } else {
                         if (!isset($config['ssh']['host']) || strlen($config['ssh']['host']) < 1) throw new \Exception('Please specify at least a SSH host in your .deployerfile to connect to!');                        
                         if (!isset($config['ssh']['user']) || strlen($config['ssh']['user']) < 1) $config['ssh']['user'] = "root";
@@ -88,9 +93,13 @@ HELP;
                         $randport = rand(60000, 65000);
                         $remotedesc = str_replace('tcp://', '', $config['host']);
 
-                        $cmdstring = 'ssh -n -i ' . escapeshellarg($config['ssh']['privatekey']) . ' -L ' . $randport . ':' . $remotedesc . ' -p ' . $config['ssh']['port'] . ' ' . $config['ssh']['user'] . '@' . $config['ssh']['host'];                        
+                        $cmdstring = 'ssh -N -i ' . escapeshellarg($config['ssh']['privatekey']) . ' -L ' . $randport . ':' . $remotedesc . ' -p ' . $config['ssh']['port'] . ' ' . $config['ssh']['user'] . '@' . $config['ssh']['host'];                        
 
-                        if (isset($config['ssh']['password']) || strlen($config['ssh']['password']) > 1) {
+                        if (isset($config['ssh']['password']) && strlen($config['ssh']['password']) > 1) {
+                            if (!extension_loaded('expect')) {
+                                throw new \Exception('Expect extension not found: Please make sure the PHP expect extension is available in your PHP installation!');
+                            }
+
                             $stream = fopen('expect://' . $cmdstring, 'r');
 
                             $cases = array (
@@ -118,12 +127,13 @@ HELP;
                                     throw new \Exception('Unable to connect to the remote SSH host! Invalid string received: Expected passphrase prompt.');                                    
                             }
                         } else {
-                            $stream = popen($cmdstring, 'r');                            
+                            $stream = proc_open('exec ' . $cmdstring, array(), $pipes);   
+                            $useProc = true;
 
                             // Wait for tunnel port to be available
                             while(true) {
                                 $socket = @fsockopen('127.0.0.1', $randport, $errno, $errstr, 5);
-                                           
+
                                 if ($socket) {
                                     fclose($socket);
                                     break;
@@ -135,7 +145,7 @@ HELP;
             }
         }
 
-        $client = new \Docker\Http\Client('tcp://127.0.0.1:' . $randport);
+        $client = new \Docker\Http\DockerClient(array(), 'tcp://127.0.0.1:' . $randport);
         $docker = new \Docker\Docker($client);
 
         // -> Build the docker image if a Dockerfile is present
@@ -144,9 +154,12 @@ HELP;
         }
 
         parent::showMessage('DOCKER', 'Building image (no-cache)...', $this->output);
+        parent::showMessage('DOCKER', 'Uploading context...', $this->output);
 
         $context = new \Docker\Context\Context($gitpath);
-        $apiResponse = $docker->build($context, 'git-deployer/' . $project->name(), false, false);
+        $apiResponse = $docker->build($context, 'git-deployer/' . $project->name(), function ($m) {
+            parent::showMessage('BUILD', $m['stream'], $this->output);
+        }, false, false, true);
 
         if (!$apiResponse->getStatusCode() == 200) {
             throw new \Exception('Could not build docker image: Error ' . $apiResponse->getStatusText() );            
@@ -161,7 +174,24 @@ HELP;
         if (count($containersOnHost) > 0) {
             // We check for a container with the same name as the one we are going to deploy
             foreach ($containersOnHost as $key => $container) {
+                $containerFound = false;
+
+                // Search by name
+                foreach ($container->getData()['Names'] as $name) {
+                    $cleanName = $this->cleanName($project->name());
+                    preg_match('#\/.*\/(.*)#', $name, $matches);
+
+                    if ($cleanName == $matches[1]) {
+                        $containerFound = true;
+                    }
+                }
+
+                // Search by image
                 if ($container->getData()['Image'] == 'git-deployer/' . $project->name()) {
+                    $containerFound = true;   
+                }
+
+                if ($containerFound) {
                     parent::showMessage('DOCKER', 'Stopping old container ' . $container->getId() .  '...', $this->output);
 
                     $docker->getContainerManager()->stop($container);
@@ -174,6 +204,7 @@ HELP;
         parent::showMessage('DOCKER', 'Starting new container...', $this->output);
 
         $container = new \Docker\Container(['Image' => 'git-deployer/' . $project->name()]);
+        $container->setName($this->cleanName($project->name()));
 
         // Add exposed ports from the config file, if any
         if (isset($config['ports']) && is_array($config['ports']) && count($config['ports']) > 0) {
@@ -194,7 +225,14 @@ HELP;
         $docker->getContainerManager()->run($container, null, ['PortBindings' => $portCollection->toSpec(), 'RestartPolicy' => $this->parseRestartPolicy($restartPolicy)], true);
 
         // -> Clean up and close the SSH tunnel
-        fclose ($stream);
+        if ($useTunnel) {
+            if ($useProc) {
+                proc_terminate($stream, 9);
+                proc_close($stream);
+            } else {
+                fclose($stream);
+            }
+        }
 
         return array(
             true,
@@ -252,6 +290,25 @@ HELP;
         }
 
         return $policy;
+
+    }
+
+    /**
+     * Makes sure the project name is Docker compatible
+     * @param  string $projectname The Git-Deployer project name
+     * @return string
+     */
+    private function cleanName($projectName) {
+
+        // Special handling for dot '.', as it
+        // should remain constant in the string always
+        $projectName = str_replace('.', '_', $projectName);
+
+        // Remove any characters that don't match
+        // [a-zA-Z0-9_-]
+        $projectName = preg_replace('#([^a-zA-Z0-9_\-]*)#', '', $projectName);
+
+        return $projectName;
 
     }
 

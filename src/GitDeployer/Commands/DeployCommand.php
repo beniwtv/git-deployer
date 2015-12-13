@@ -130,7 +130,7 @@ HELP;
                     $this->showMessage('GIT', 'Pulling latest changes from repository...', $output);
 
                     $repository = \Gitonomy\Git\Admin::init($tmpDir, false);
-                    //$repository->run('pull');
+                    $repository->run('pull');
                 } else {
                     $this->showMessage('GIT', 'Cloning repository...', $output);
                     $repository = \Gitonomy\Git\Admin::cloneTo($tmpDir, $project->url(), false);
@@ -140,7 +140,7 @@ HELP;
                 $this->showMessage('GIT', 'Checking out ' . $revision . '...', $output);                
                 
                 $wc = $repository->getWorkingCopy();
-                //$wc->checkout($version);
+                $wc->checkout($version);
 
                 // -> Open .deployerfile and parse it
                 $this->showMessage('DEPLOY', 'Checking .deployerfile...', $output);
@@ -294,21 +294,14 @@ HELP;
 
                 if (isset($deployerfile->parameters)) {
                     foreach ($deployerfile->parameters as $key => $questionhelp) {
-                        if (!isset($answers[$key]) || strlen($answers[$key]) < 0) {
+                        if (!isset($answers[$key])) {
                             $helper = $this->getHelper('question');
 
                             $question = new Question($questionhelp . ' ');
-                            $question->setValidator(function ($answer) {
-                                if (strlen($answer) < 1) {
-                                    throw new \RuntimeException(
-                                        'Please provide an answer for this question!'
-                                    );
-                                }
 
-                                return $answer;
-                            });
+			    $questionanswer = $helper->ask($input, $output, $question);
+			    if ($questionanswer == null) $answers[$key] = '';
 
-                            $answers[$key] = $helper->ask($input, $output, $question);
                             $bagModified = true;
                         }
                     }
