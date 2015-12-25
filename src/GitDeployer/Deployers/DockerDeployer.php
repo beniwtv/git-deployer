@@ -78,7 +78,7 @@ HELP;
         if (stristr($config['host'], 'tcp://')) {
             // Setting the docker host to tcp:// may enable usage of the SSH tunnel functionality
             if (isset($config['ssh']) && is_array($config['ssh'])) {
-                if (isset($config['ssh']['tunnel']) && $config['ssh']['tunnel'] === true) {
+                if (isset($config['ssh']['tunnel']) && $config['ssh']['tunnel'] == true) {
                     $useProc = false;
                     $useTunnel = true;
 
