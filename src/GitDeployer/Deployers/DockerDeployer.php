@@ -20,35 +20,41 @@ class DockerDeployer extends BaseDeployer {
 
  For the <info>docker</info> deployer, we currently have the following configuration options:
 
- <comment>"host"</comment>:     (string) This variable overrides the DOCKER_HOST environment variable. If 
-             you do not specify it, we will use the value from DOCKER_HOST instead.
+ <comment>"host"</comment>:        (string) This variable overrides the DOCKER_HOST environment variable. If 
+                you do not specify it, we will use the value from DOCKER_HOST instead.
 
-             Valid formats are unix sockets, like <comment>unix:///var/run/docker.sock</comment>, and tcp 
-             sockets, like <comment>tcp://127.0.0.1:2375</comment>.
+                Valid formats are unix sockets, like <comment>unix:///var/run/docker.sock</comment>, and tcp 
+                sockets, like <comment>tcp://127.0.0.1:2375</comment>.
 
- <comment>"restrart"</comment>: (string) This variable controls whether Docker will restart the container
-             and under what condition. Possible values are: no (default), on-failure[:max-retries], 
-             always, unless-stopped.
+ <comment>"restrart"</comment>:    (string) This variable controls whether Docker will restart the container
+                and under what condition. Possible values are: no (default), on-failure[:max-retries], 
+                always, unless-stopped.
 
- <comment>"ssh"</comment>:      (object) This variable allows you to specify a SSH-tunnel that will be created
-             and used to connect to the DOCKER_HOST variable. Only supported with tcp://-style URLs.
+ <comment>"ssh"</comment>:         (object) This variable allows you to specify a SSH-tunnel that will be created
+                and used to connect to the DOCKER_HOST variable. Only supported with tcp://-style URLs.
     
-             You will need to specify the following sub-parameters:
+                You will need to specify the following sub-parameters:
 
-             <comment>"tunnel"</comment>:     Set to true to enable SSH-tunneling (required).
-             <comment>"user"</comment>:       The user for the SSH connection on the remote host (optional, will use "root" as default).
-             <comment>"host"</comment>:       The remote host for the SSH connection (required).
-             <comment>"port"</comment>:       The remote host port for the SSH connection (optional, will use 22 as default).
-             <comment>"key"</comment>:        The SSH private key file for authentication to the remote host (required)
-             <comment>"password"</comment>:   The password for the SSH private key file (optional, you will be asked for a password if needed)
+                <comment>"tunnel"</comment>:     Set to true to enable SSH-tunneling (required).
+                <comment>"user"</comment>:       The user for the SSH connection on the remote host (optional, will use "root" as default).
+                <comment>"host"</comment>:       The remote host for the SSH connection (required).
+                <comment>"port"</comment>:       The remote host port for the SSH connection (optional, will use 22 as default).
+                <comment>"key"</comment>:        The SSH private key file for authentication to the remote host (required)
+                <comment>"password"</comment>:   The password for the SSH private key file (optional, you will be asked for a password if needed)
 
- <comment>"ports"</comment>:    (array) Specifies the ports you want Docker to expose. If supports the complete Docker
-             port description syntax, which is: [[hostIp:][hostPort]:]port[/protocol]. Examples:
+ <comment>"ports"</comment>:        (array) Specifies the ports you want Docker to expose. If supports the complete Docker
+                port description syntax, which is: [[hostIp:][hostPort]:]port[/protocol]. Examples:
 
-             80
-             80/tcp
-             8080:80
-             ...
+                80
+                80/tcp
+                8080:80
+                ...
+
+ <comment>"environment"</comment>: (object) Specifies the environment variables passed to Docker. Of type key => value, examples:
+
+                "dbtype": "mysql",
+                "dbuser": "user",
+                "dbpassword": "%dbpassword%" (placeholders supported)
 
 HELP;
 
@@ -216,6 +222,13 @@ HELP;
             }
 
             $container->setExposedPorts($portCollection);
+        }
+
+        // Add environment from the config file, if any
+        if (isset($config['environment'])) {
+            foreach ($config['environment'] as $key => $value) {
+                $container->addEnv([$key . '=' .  $value]);
+            }
         }
 
         // Add restart policy
