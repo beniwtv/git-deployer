@@ -78,7 +78,7 @@ HELP;
         if (stristr($config['host'], 'tcp://')) {
             // Setting the docker host to tcp:// may enable usage of the SSH tunnel functionality
             if (isset($config['ssh']) && is_array($config['ssh'])) {
-                if (isset($config['ssh']['tunnel']) && $config['ssh']['tunnel'] == true) {
+                if (isset($config['ssh']['tunnel']) && $config['ssh']['tunnel'] === true) {
                     $useProc = false;
                     $useTunnel = true;
 
@@ -86,7 +86,7 @@ HELP;
 
                     // Check if the ssh binary is executable, else bail out
                     // since we can't open a tunnel without it
-                    if (!$this->command_exists('ssh')) {
+                    if (!$this->commandExists('ssh')) {
                         throw new \Exception('SSH client not found: Please make sure the "ssh" command is available, and in your $PATH!');
                     } else {
                         if (!isset($config['ssh']['host']) || strlen($config['ssh']['host']) < 1) throw new \Exception('Please specify at least a SSH host in your .deployerfile to connect to!');                        
@@ -260,7 +260,7 @@ HELP;
      * @param  string $command The command to check
      * @return bool
      */
-    private function command_exists($command) {
+    private function commandExists($command) {
         
         $whereIsCommand = (PHP_OS == 'WINNT') ? 'where' : 'which';
 
@@ -272,9 +272,7 @@ HELP;
 
         if ($process !== false) {
             $stdout = stream_get_contents($pipes[1]);
-            $stderr = stream_get_contents($pipes[2]);
             fclose($pipes[1]);
-            fclose($pipes[2]);
             proc_close($process);
 
             return $stdout != '';
