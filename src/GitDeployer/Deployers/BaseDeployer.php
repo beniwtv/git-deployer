@@ -115,9 +115,10 @@ class BaseDeployer {
             if (!in_array($m, array('.','..','BaseDeployer.php'))) {
 
                 $className = __NAMESPACE__ . '\\' . str_replace('Deployer.php', '', $m) . 'Deployer';
-                $servClass = new $className();                
-
-                return str_replace('Deployer.php', '', $m);
+                
+                if (class_exists($className)) {                
+                    return str_replace('Deployer.php', '', $m);
+                }
             }
         }, $deployers);
 

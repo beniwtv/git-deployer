@@ -359,6 +359,9 @@ HELP;
                     $status->deployedString($version);
 
                     $storage->setDeploymentStatus($project, $status);
+                } else {
+                    $output->writeln($trace);
+                    throw new \Exception('Deployment did not completely finish! See trace above.');
                 }
 
                 // -> Finish up!
