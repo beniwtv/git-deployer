@@ -14,7 +14,7 @@ using Git-Deployer.
 1) Installing Git-Deployer
 --------------------------
 
-To install Git-Deployer, you can download an [PHAR-archive][1], and put it
+To install Git-Deployer, you can download a PHAR-archive, and put it
 somewhere in your $PATH, for example:
 
 ```
@@ -140,5 +140,3 @@ git-deployer help deploy <deployer>
 --------
 
 See git-deployer -h for more commands and help!
-
-[1]: https://github.com/git-deployer
