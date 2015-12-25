@@ -112,7 +112,7 @@ HELP;
                                 array ('Enter passphrase', PASSWORD)
                             );
 
-                            ini_set("expect.timeout", -1);
+                            ini_set("expect.timeout", 30);
 
                             switch (expect_expectl ($stream, $cases)) {
                                 case PASSWORD:
