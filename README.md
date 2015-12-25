@@ -5,9 +5,6 @@
 Git-Deployer
 ============
 
-**WARNING: This software is currently in development. No stable releases have 
-come out yet. In addition, the deploy process does not yet fully work!**
-
 Welcome to Git-Deployer! Git-Deployer is a tool which you can use to manage
 your deployments from Git repositories.
 

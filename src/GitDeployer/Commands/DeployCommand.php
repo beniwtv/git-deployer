@@ -140,7 +140,7 @@ HELP;
                 $this->showMessage('GIT', 'Checking out ' . $revision . '...', $output);                
                 
                 $wc = $repository->getWorkingCopy();
-                $wc->checkout($version);
+                //$wc->checkout($version);
 
                 // -> Open .deployerfile and parse it
                 $this->showMessage('DEPLOY', 'Checking .deployerfile...', $output);
@@ -299,8 +299,13 @@ HELP;
 
                             $question = new Question($questionhelp . ' ');
 
-			    $questionanswer = $helper->ask($input, $output, $question);
-			    if ($questionanswer == null) $answers[$key] = '';
+			                $questionanswer = $helper->ask($input, $output, $question);
+			                
+                            if ($questionanswer == null) {
+                                $answers[$key] = '';
+                            } else {
+                                $answers[$key] = $questionanswer;
+                            }
 
                             $bagModified = true;
                         }
