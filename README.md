@@ -18,7 +18,9 @@ To install Git-Deployer, you can download an [PHAR-archive][1], and put it
 somewhere in your $PATH, for example:
 
 ```
-curl -o /usr/bin/git-deployer https://github.com/git-deployer
+sudo curl -L -o /usr/bin/git-deployer https://github.com/relamptk/git-deployer/releases/download/0.1.0/git-deployer.phar
+sudo curl -L -o /usr/bin/git-deployer.pubkey https://github.com/relamptk/git-deployer/releases/download/0.1.0/git-deployer.phar.pubkey
+sudo chmod +x /usr/bin/git-deployer
 ```
 
 2) Using Git-Deployer
