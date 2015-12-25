@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"project",
+				"$projectName〔variable〕"
+			],
+			[
+				"con",
+				"config"
+			],
+			[
+				"print",
+				"print_r〔function〕"
+			],
+			[
+				"termi",
+				"terminateChildren"
+			],
+			[
 				"wir",
 				"writeln〔function〕"
 			],
@@ -260,10 +276,6 @@
 				"apiUrl"
 			],
 			[
-				"con",
-				"configs"
-			],
-			[
 				"app",
 				"appConfig"
 			],
@@ -332,10 +344,10 @@
 	"buffers":
 	[
 		{
-			"file": "README.md",
+			"file": "src/GitDeployer/Commands/DeployCommand.php",
 			"settings":
 			{
-				"buffer_size": 3890,
+				"buffer_size": 19149,
 				"line_ending": "Unix"
 			}
 		}
@@ -462,8 +474,19 @@
 	],
 	"file_history":
 	[
-		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json.dist",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Container.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers/DockerDeployer.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Docker.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/DockerClient.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Context/Context.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/Client.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/composer.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/Request.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json.dist",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/bin/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/stuff/deployerfile.json.template",
@@ -474,13 +497,10 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/build.sh",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/LICENSE",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/.gitignore",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/HistoryCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/AddCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InfoCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/LoginCommand.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/LocalStorage.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Storage/BaseStorage.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/BaseService.php",
@@ -581,15 +601,7 @@
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/layout.html.twig",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/bower.json",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/angular.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb-controllers.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/etc/translacia",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/css/style.css",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/css/font-awesome.css",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/routing_dev.yml",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/routing.yml",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/master.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/layout_pages.html.twig"
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb.js"
 	],
 	"find":
 	{
@@ -609,6 +621,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"true",
+			"Guzzle",
+			"base_uri",
+			"Guzzle",
 			"_saveDeploymentStatuses",
 			"_interactiveLogin",
 			"_getStorageServices",
@@ -695,30 +711,33 @@
 			[
 				{
 					"buffer": 0,
-					"file": "README.md",
+					"file": "src/GitDeployer/Commands/DeployCommand.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3890,
+						"buffer_size": 19149,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								741,
-								741
+								5829,
+								5829
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2160.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -972,7 +991,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 359.0,
+	"side_bar_width": 279.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
