@@ -236,17 +236,15 @@ class GitHubService extends BaseService {
 
         $config = [
             // Base URI is used with relative requests
-            'base_url'              => $this->url,
-            'defaults'              => array(
-                'allow_redirects'   => true,
-                'headers'           => array(
-                    'Accept'        => 'application/vnd.github.v3+json'
-                )
+            'base_uri'              => $this->url,
+            'allow_redirects'       => true,
+            'headers'               => array(
+                'Accept'            => 'application/vnd.github.v3+json'
             )
         ];
 
         if ($token !== null) {
-            $config['defaults']['headers']['Authorization'] = 'token ' . $token;
+            $config['headers']['Authorization'] = 'token ' . $token;
         }
 
         $client = new Client($config);

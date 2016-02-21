@@ -235,11 +235,11 @@ class GitLabService extends BaseService {
 
         $config = [
             // Base URI is used with relative requests
-            'base_url' => $this->url . '/api/v3/'
+            'base_uri' => $this->url . '/api/v3/'
         ];
 
         if ($key != null) {
-            $config['defaults']['headers'] = [
+            $config['headers'] = [
                 'PRIVATE-TOKEN' => $key
             ];
         }
@@ -311,7 +311,7 @@ class GitLabService extends BaseService {
         // Login is a FORM post
         try {
             $response = $client->post('session', [
-                'body' => [
+                'form_params' => [
                     'login'     => $this->user,
                     'password'  => $password
                 ]
