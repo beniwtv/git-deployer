@@ -26,7 +26,9 @@ class DockerDeployer extends BaseDeployer {
                 Valid formats are unix sockets, like <comment>unix:///var/run/docker.sock</comment>, and tcp 
                 sockets, like <comment>tcp://127.0.0.1:2375</comment>.
 
- <comment>"restrart"</comment>:    (string) This variable controls whether Docker will restart the container
+ <comment>"ssl"</comment>:         (boolean) Whether to enable SSL for the connection (default false)
+
+ <comment>"restart"</comment>:     (string) This variable controls whether Docker will restart the container
                 and under what condition. Possible values are: no (default), on-failure[:max-retries], 
                 always, unless-stopped.
 
@@ -151,7 +153,11 @@ HELP;
             }
         }
 
-        $client = new \Docker\Http\DockerClient(array(), 'tcp://127.0.0.1:' . $randport);
+        $client = new \Docker\DockerClient(array(
+            'remote_socket' => 'tcp://127.0.0.1:' . $randport,
+            'ssl' => ( isset($config['ssl']) && $config['ssl'] == true ? true : false )
+        ));
+
         $docker = new \Docker\Docker($client);
 
         // -> Build the docker image if a Dockerfile is present
@@ -162,28 +168,34 @@ HELP;
         parent::showMessage('DOCKER', 'Building image (no-cache)...', $this->output);
         parent::showMessage('DOCKER', 'Uploading context...', $this->output);
 
-        $context = new \Docker\Context\Context($gitpath);
-        $apiResponse = $docker->build($context, 'git-deployer/' . $project->name(), function ($m) {
-            parent::showMessage('BUILD', $m['stream'], $this->output);
-        }, false, false, true);
+        /*$context = new \Docker\Context\Context($gitpath);
 
-        if (!$apiResponse->getStatusCode() == 200) {
+        $imageManager = $docker->getImageManager();
+        $buildStream = $imageManager->build($context->toStream(), array(), \Docker\Manager\ContainerManager::FETCH_STREAM);
+
+        $buildStream->onFrame(function (\Docker\API\Model\BuildInfo $buildInfo) {
+            parent::showMessage('BUILD', $buildInfo->getStream(), $this->output);
+        });
+
+        $buildStream->wait();*/
+
+        /*if (!$apiResponse->getStatusCode() == 200) {
             throw new \Exception('Could not build docker image: Error ' . $apiResponse->getStatusText() );            
-        }
+        }*/
 
         // -> Stop and remove the old container with the same name, sicne we're going
         // to replace the app here with the newly built container
         parent::showMessage('DOCKER', 'Getting running containers...', $this->output);
 
         $containersOnHost = $docker->getContainerManager()->findAll();
-        
+
         if (count($containersOnHost) > 0) {
             // We check for a container with the same name as the one we are going to deploy
             foreach ($containersOnHost as $key => $container) {
                 $containerFound = false;
 
                 // Search by name
-                foreach ($container->getData()['Names'] as $name) {
+                foreach ($container->getNames() as $name) {
                     $cleanName = $this->cleanName($project->name());
                     preg_match('#\/.*\/(.*)#', $name, $matches);
 
@@ -193,15 +205,15 @@ HELP;
                 }
 
                 // Search by image
-                if ($container->getData()['Image'] == 'git-deployer/' . $project->name()) {
+                if ($container->getImage() == 'git-deployer/' . $project->name()) {
                     $containerFound = true;   
                 }
 
                 if ($containerFound) {
                     parent::showMessage('DOCKER', 'Stopping old container ' . $container->getId() .  '...', $this->output);
 
-                    $docker->getContainerManager()->stop($container);
-                    $docker->getContainerManager()->remove($container);
+                    $docker->getContainerManager()->stop($container->getId());
+                    $docker->getContainerManager()->remove($container->getId());
                 }
             }
         }
@@ -209,7 +221,7 @@ HELP;
         // -> Start the container up if we have built sucessfully
         parent::showMessage('DOCKER', 'Starting new container...', $this->output);
 
-        $container = new \Docker\Container(['Image' => 'git-deployer/' . $project->name()]);
+        $container = new \Docker\API\Model\Container(['Image' => 'git-deployer/' . $project->name()]);
         $container->setName($this->cleanName($project->name()));
 
         // Add exposed ports from the config file, if any
@@ -217,7 +229,7 @@ HELP;
             $portCollection = new \Docker\PortCollection();
 
             foreach ($config['ports'] as $portdesc) {
-                $port = new \Docker\Port($portdesc);
+                $port = new \Docker\API\Model\Port($portdesc);
                 $portCollection->add($port);
             }
 
