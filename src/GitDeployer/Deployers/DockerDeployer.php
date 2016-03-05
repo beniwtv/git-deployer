@@ -243,7 +243,7 @@ HELP;
                 $portspec = $this->parsePortSpecification($portdesc);
                 
                 // Exposed port
-                $exposedPort = $portspec['port'] . (strlen($portspec['protocol']) > 0 ? '/' . $portspec['protocol'] : '' );
+                $exposedPort = $portspec['port'] . (strlen($portspec['protocol']) > 0 ? '/' . $portspec['protocol'] : '/tcp' );
 
                 $exposedPorts[$exposedPort] = new \stdClass();
 
