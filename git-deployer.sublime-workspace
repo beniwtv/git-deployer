@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"cont",
+				"containerConfig"
+			],
+			[
+				"containe",
+				"$containersOnHost〔variable〕"
+			],
+			[
+				"class",
+				"class_exists〔function〕"
+			],
+			[
+				"out",
+				"output	<output>"
+			],
+			[
 				"project",
 				"$projectName〔variable〕"
 			],
@@ -344,10 +360,37 @@
 	"buffers":
 	[
 		{
-			"file": "src/GitDeployer/Commands/DeployCommand.php",
+			"contents": "Remote:   origin @ git@github.com:relamptk/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     1e60a8b Updating depencencies (WARNING: Do NOT use yet)\n\n\nChanges:\n	Modified   git-deployer.sublime-workspace\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 19149,
+				"buffer_size": 992,
+				"line_ending": "Unix",
+				"name": "*git-status*: git-deployer",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/GitDeployer/Deployers/DockerDeployer.php",
+			"settings":
+			{
+				"buffer_size": 15117,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/docker-php/docker-php/generated/Model/RestartPolicy.php",
+			"settings":
+			{
+				"buffer_size": 839,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/docker-php/docker-php/generated/Model/ContainerConfig.php",
+			"settings":
+			{
+				"buffer_size": 10990,
 				"line_ending": "Unix"
 			}
 		}
@@ -368,7 +411,43 @@
 				"Git: Push Current Branch"
 			],
 			[
+				"remote",
+				"Git: Remote"
+			],
+			[
 				"comm",
+				"Git: Commit"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"pusch",
+				"Git: Push Current Branch"
+			],
+			[
+				"commt",
+				"Git: Commit"
+			],
+			[
+				"tag",
+				"Git: Add Tag"
+			],
+			[
+				"log",
+				"Git: Log"
+			],
+			[
+				"co",
+				"Git: Commit"
+			],
+			[
+				"cm",
+				"Git: Commit"
+			],
+			[
+				"commi",
 				"Git: Commit"
 			],
 			[
@@ -378,14 +457,6 @@
 			[
 				"pus",
 				"Git: Push"
-			],
-			[
-				"commi",
-				"Git: Commit"
-			],
-			[
-				"status",
-				"Git: Status"
 			],
 			[
 				"commit",
@@ -408,16 +479,8 @@
 				"SFTP: Browse Server…"
 			],
 			[
-				"tag",
-				"Git: Add Tag"
-			],
-			[
 				"mer",
 				"Git: Mergetool"
-			],
-			[
-				"commt",
-				"Git: Commit"
 			],
 			[
 				"stat",
@@ -467,27 +530,37 @@
 	"expanded_folders":
 	[
 		"/home/beniwtv/ownCloud/Projects/git-deployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/bin",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands"
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model"
 	],
 	"file_history":
 	[
-		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Container.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/src/Manager/ContainerManager.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/ContainerConfig.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/Container.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers/DockerDeployer.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/Port.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/package.xml",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers/BaseDeployer.php",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Container.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Docker.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/DockerClient.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/composer.json",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitLabService.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Services/GitHubService.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Context/Context.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/Client.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/composer.json",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/stage1/docker-php/src/Docker/Http/Request.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/box.json.dist",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/bin/git-deployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/stuff/deployerfile.json.template",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/InitCommand.php",
@@ -595,13 +668,7 @@
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/config_dev.yml",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/DependencyInjection/Configuration.php",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/config/config.yml",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angTerms.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angPrivacy.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/css/style.css",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/layout.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/bower.json",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angular/angular.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/js/translaciaweb.js"
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angTerms.html.twig"
 	],
 	"find":
 	{
@@ -612,6 +679,9 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
+			"/home/beniwtv/ownCloud/Projects/git-deployer/src",
+			"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands",
 			"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 			"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/components/jquery-file-upload/js"
 		]
@@ -621,6 +691,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"createClient",
+			"expect.timeout",
+			"servClass",
+			"getWorkingCopy",
+			"stream_get_contents",
+			"command_exists",
 			"true",
 			"Guzzle",
 			"base_uri",
@@ -706,24 +782,59 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/GitDeployer/Commands/DeployCommand.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19149,
+						"buffer_size": 992,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5829,
-								5829
+								361,
+								361
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"draw_white_space": "none",
+							"git_repo": "/home/beniwtv/ownCloud/Projects/git-deployer",
+							"git_status": true,
+							"git_view": "status",
+							"incomplete_sync": null,
+							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/GitDeployer/Deployers/DockerDeployer.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15117,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11495,
+								11495
 							]
 						],
 						"settings":
@@ -732,15 +843,81 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2160.0,
+						"translation.y": 4518.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vendor/docker-php/docker-php/generated/Model/RestartPolicy.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								501,
+								501
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "vendor/docker-php/docker-php/generated/Model/ContainerConfig.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10990,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7839,
+								7845
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8887.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -991,7 +1168,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 279.0,
+	"side_bar_width": 321.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

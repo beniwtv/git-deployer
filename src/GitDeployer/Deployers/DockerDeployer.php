@@ -168,7 +168,7 @@ HELP;
         parent::showMessage('DOCKER', 'Building image (no-cache)...', $this->output);
         parent::showMessage('DOCKER', 'Uploading context...', $this->output);
 
-        /*$context = new \Docker\Context\Context($gitpath);
+        $context = new \Docker\Context\Context($gitpath);
 
         $imageManager = $docker->getImageManager();
         $buildStream = $imageManager->build($context->toStream(), array(), \Docker\Manager\ContainerManager::FETCH_STREAM);
@@ -177,11 +177,7 @@ HELP;
             parent::showMessage('BUILD', $buildInfo->getStream(), $this->output);
         });
 
-        $buildStream->wait();*/
-
-        /*if (!$apiResponse->getStatusCode() == 200) {
-            throw new \Exception('Could not build docker image: Error ' . $apiResponse->getStatusText() );            
-        }*/
+        $buildStream->wait();
 
         // -> Stop and remove the old container with the same name, sicne we're going
         // to replace the app here with the newly built container
@@ -221,33 +217,59 @@ HELP;
         // -> Start the container up if we have built sucessfully
         parent::showMessage('DOCKER', 'Starting new container...', $this->output);
 
-        $container = new \Docker\API\Model\Container(['Image' => 'git-deployer/' . $project->name()]);
-        $container->setName($this->cleanName($project->name()));
+        $hostConfig = new \Docker\API\Model\HostConfig();
+
+        $containerConfig = new \Docker\API\Model\ContainerConfig();        
+        $containerConfig->setNames(array('git-deployer/' . $this->cleanName($project->name())));
+        $containerConfig->setImage('git-deployer/' . $project->name());
+
+        // Add environment from the config file, if any
+        $envArray = array();
+
+        if (isset($config['environment'])) {
+            foreach ($config['environment'] as $key => $value) {
+                $envArray[$key] = $value;
+            }
+        }
+
+        $containerConfig->setEnv($envArray);
 
         // Add exposed ports from the config file, if any
         if (isset($config['ports']) && is_array($config['ports']) && count($config['ports']) > 0) {
-            $portCollection = new \Docker\PortCollection();
+            $exposedPorts = new \ArrayObject();
+            $mapPorts = new \ArrayObject();
 
             foreach ($config['ports'] as $portdesc) {
-                $port = new \Docker\API\Model\Port($portdesc);
-                $portCollection->add($port);
+                $portspec = $this->parsePortSpecification($portdesc);
+                
+                // Exposed port
+                $exposedPort = $portspec['port'] . (strlen($portspec['protocol']) > 0 ? '/' . $portspec['protocol'] : '' );
+
+                $exposedPorts[$exposedPort] = new \stdClass();
+
+                // Host port binding
+                $hostPortBinding = new \Docker\API\Model\PortBinding();
+                $mapPorts[$exposedPort] = array($hostPortBinding);
             }
 
-            $container->setExposedPorts($portCollection);
-        }
-
-        // Add environment from the config file, if any
-        if (isset($config['environment'])) {
-            foreach ($config['environment'] as $key => $value) {
-                $container->addEnv([$key . '=' .  $value]);
-            }
+            $containerConfig->setExposedPorts($exposedPorts);
+            $hostConfig->setPortBindings($mapPorts);
         }
 
         // Add restart policy
-        $restartPolicy = 'no';
-        if (isset($config['restart']) && strlen($config['restart']) > 0) $restartPolicy = $config['restart'];
+        if (isset($config['restart']) && strlen($config['restart']) > 0) {
+            $policy = $this->parseRestartPolicy($config['restart']);
 
-        $docker->getContainerManager()->run($container, null, ['PortBindings' => $portCollection->toSpec(), 'RestartPolicy' => $this->parseRestartPolicy($restartPolicy)], true);
+            $restartPolicy = new \Docker\API\Model\RestartPolicy();
+            $restartPolicy->setName($policy['Name']);
+            if (isset($policy['MaximumRetryCount'])) $restartPolicy->setMaximumRetryCount($policy['MaximumRetryCount']);
+
+            $hostConfig->setRestartPolicy($restartPolicy);
+        }
+
+        $containerConfig->setHostConfig($hostConfig);
+        $containerCreateResult = $docker->getContainerManager()->create($containerConfig);
+        $docker->getContainerManager()->start($containerCreateResult->getId());
 
         // -> Clean up and close the SSH tunnel
         if ($useTunnel) {
@@ -313,6 +335,35 @@ HELP;
         }
 
         return $policy;
+
+    }
+
+    /**
+     * Parses a Docker port specification and returns the port data
+     * @param  string $portSpecification The Docker port specification
+     * @return array
+     */
+    private function parsePortSpecification($portSpecification) {
+        
+        if (!preg_match('/(?:(?<hostIp>[0-9\.]{7,15}):)?(?:(?<hostPort>\d{1,5}|):)?(?<port>\d{1,5})(?:\/(?<protocol>\w+))?/', $portSpecification, $matches)) {
+            throw new \Exception('Invalid port specification "' . $portSpecification . '"');
+        }
+
+        $parsed = [];
+        
+        foreach (['hostIp', 'hostPort', 'port', 'protocol'] as $key) {
+            if (array_key_exists($key, $matches)) {
+                $parsed[$key] = strlen($matches[$key]) > 0
+                    ? (is_numeric($matches[$key])
+                        ? (integer) $matches[$key]
+                        : $matches[$key])
+                    : null;
+            } else {
+                $parsed[$key] = null;
+            }
+        }
+        
+        return $parsed;
 
     }
 
