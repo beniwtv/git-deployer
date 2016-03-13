@@ -268,8 +268,11 @@ HELP;
         }
 
         $containerConfig->setHostConfig($hostConfig);
-        $containerCreateResult = $docker->getContainerManager()->create($containerConfig);
-        $docker->getContainerManager()->start($containerCreateResult->getId());
+        $containerCreateResult = $docker->getContainerManager()->create($containerConfig, array('name' => $this->cleanName($project->name())));
+        
+        if ($containerCreateResult->getId()) {
+            $docker->getContainerManager()->start($containerCreateResult->getId());
+        }
 
         // -> Clean up and close the SSH tunnel
         if ($useTunnel) {

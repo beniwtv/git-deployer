@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"And",
+				"Andalucía"
+			],
+			[
 				"param",
 				"$parameters〔variable〕"
 			],
@@ -376,7 +380,7 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:relamptk/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     f13aae7 Few more fixes for new dependencies\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:relamptk/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     c57fa1c Fix ports without protocol\n\n\nChanges:\n	Modified   git-deployer.sublime-workspace\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
 				"buffer_size": 971,
@@ -384,6 +388,14 @@
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
 				"scratch": true
+			}
+		},
+		{
+			"file": "src/GitDeployer/Deployers/DockerDeployer.php",
+			"settings":
+			{
+				"buffer_size": 16802,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -395,9 +407,17 @@
 	"command_palette":
 	{
 		"height": 138.0,
-		"last_filter": "push",
+		"last_filter": "psuh",
 		"selected_items":
 		[
+			[
+				"psuh",
+				"Git: Push"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
 			[
 				"push",
 				"Git: Push Current Branch"
@@ -453,10 +473,6 @@
 			[
 				"pus",
 				"Git: Push"
-			],
-			[
-				"commit",
-				"Git: Commit"
 			],
 			[
 				"pu",
@@ -525,16 +541,19 @@
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers",
+		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Objects",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php"
 	],
 	"file_history":
 	[
+		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Resource/ContainerResource.php",
+		"/home/beniwtv/ownCloud/Projects/rancho-andalucia.es/html-template.html",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers/DockerDeployer.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/jane/open-api/src/Client/QueryParam.php",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Resource/ContainerResource.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/PortBinding.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/ContainerConfig.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php/generated/Model/HostConfig.php",
@@ -657,12 +676,11 @@
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/modernizr/test/caniuse_files/ga.js",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angulartics/samples/google-analytics.html",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/cache/dev/sp_bower/bower.json",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sp/bower-bundle/Sp/BowerBundle/composer.json",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/xml/orm_service_multiple_entity_managers.xml"
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sp/bower-bundle/Sp/BowerBundle/composer.json"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -686,6 +704,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"create(",
+			"create",
+			"Geor",
 			"setDefaults",
 			"configureOptions",
 			"buildQueryString",
@@ -787,7 +808,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -802,8 +823,8 @@
 						"selection":
 						[
 							[
-								626,
-								626
+								242,
+								242
 							]
 						],
 						"settings":
@@ -820,6 +841,36 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/GitDeployer/Deployers/DockerDeployer.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16802,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12674,
+								12674
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"incomplete_sync": null,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5389.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
