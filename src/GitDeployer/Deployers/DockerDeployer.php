@@ -171,7 +171,9 @@ HELP;
         $context = new \Docker\Context\Context($gitpath);
 
         $imageManager = $docker->getImageManager();
-        $buildStream = $imageManager->build($context->toStream(), array(), \Docker\Manager\ContainerManager::FETCH_STREAM);
+        $buildStream = $imageManager->build($context->toStream(), array(
+            't' => 'git-deployer/' . $project->name()
+        ), \Docker\Manager\ContainerManager::FETCH_STREAM);
 
         $buildStream->onFrame(function (\Docker\API\Model\BuildInfo $buildInfo) {
             parent::showMessage('BUILD', $buildInfo->getStream(), $this->output);

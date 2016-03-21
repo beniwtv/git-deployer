@@ -20,7 +20,7 @@ class SelfUpdateCommand extends Command {
 
         $updater = new Updater();
         $updater->setStrategy(Updater::STRATEGY_GITHUB);
-        $updater->getStrategy()->setPackageName('beniwtv/git-deployer');
+        $updater->getStrategy()->setPackageName('relamptk/git-deployer');
         $updater->getStrategy()->setPharName('git-deployer.phar');
         $updater->getStrategy()->setCurrentLocalVersion($this->getApplication()->getVersion());
 
