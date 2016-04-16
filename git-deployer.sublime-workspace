@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"copy",
+				"copyData〔function〕"
+			],
+			[
+				"fi",
+				"firstName"
+			],
+			[
+				"del",
+				"delivery"
+			],
+			[
+				"sign",
+				"signupform"
+			],
+			[
 				"And",
 				"Andalucía"
 			],
@@ -328,10 +344,6 @@
 				"components"
 			],
 			[
-				"fi",
-				"fieldset	<fieldset>"
-			],
-			[
 				"text",
 				"text-align"
 			],
@@ -380,10 +392,10 @@
 	"buffers":
 	[
 		{
-			"contents": "Remote:   origin @ git@github.com:relamptk/git-deployer.git\nLocal:    master ~/ownCloud/Projects/git-deployer\nHead:     d53055d Update README\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"contents": "Remote:   origin @ git@github.com:relamptk/git-deployer.git\nLocal:    master ~/Documents/CodeRepos/git-deployer\nHead:     a90e126 - Fix Docker image name tagging - Fix self-update GitHub repository\n\n\nChanges:\n	Modified   git-deployer.sublime-workspace\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
 			"settings":
 			{
-				"buffer_size": 949,
+				"buffer_size": 1014,
 				"line_ending": "Unix",
 				"name": "*git-status*: git-deployer",
 				"read_only": true,
@@ -411,6 +423,10 @@
 				"Git: Commit"
 			],
 			[
+				"status",
+				"Git: Status"
+			],
+			[
 				"tag",
 				"Git: Add Tag"
 			],
@@ -429,10 +445,6 @@
 			[
 				"remote",
 				"Git: Remote"
-			],
-			[
-				"status",
-				"Git: Status"
 			],
 			[
 				"pusch",
@@ -529,12 +541,23 @@
 	},
 	"expanded_folders":
 	[
-		"/home/beniwtv/ownCloud/Projects/git-deployer",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/src",
-		"/home/beniwtv/ownCloud/Projects/git-deployer/vendor/docker-php/docker-php"
+		"/home/beniwtv/Documents/CodeRepos/git-deployer",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/src",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/src/GitDeployer",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/src/GitDeployer/Deployers"
 	],
 	"file_history":
 	[
+		"/tmp/sublime-sftp-browse-1458577391/web2.apac.globalroaming.com/var/www/secure/simgr/signupsim.html",
+		"/tmp/sublime-sftp-browse-1458577088/web2.apac.globalroaming.com/var/www/secure/simgr/assets/js/signup.js",
+		"/tmp/sublime-sftp-browse-1458575808/web2.apac.globalroaming.com/var/www/secure/simgr/backend.php",
+		"/tmp/sublime-sftp-browse-1458576497/web2.apac.globalroaming.com/var/www/secure/eurail/backend.php",
+		"/tmp/sublime-sftp-browse-1458576349/web2.apac.globalroaming.com/var/www/secure/simgr/assets/js/signup.js",
+		"/tmp/sublime-sftp-browse-1458575666/web2.apac.globalroaming.com/var/www/secure/simgr/signupsim.html",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/src/GitDeployer/Commands/SelfUpdateCommand.php",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/src/GitDeployer/Deployers/DockerDeployer.php",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/vendor/docker-php/docker-php/generated/Resource/ImageResource.php",
+		"/home/beniwtv/Documents/CodeRepos/git-deployer/vendor/docker-php/docker-php/src/Manager/ImageManager.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/README.md",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Commands/DeployCommand.php",
 		"/home/beniwtv/ownCloud/Projects/git-deployer/src/GitDeployer/Deployers/DockerDeployer.php",
@@ -652,21 +675,11 @@
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Controller/PagesController.php",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Entity/QuoteInfo.php",
 		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/css/style-override.css",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/public/js/translaciaweb.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/.hgignore",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/composer.json",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/routing.yml",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/config/config_dev.yml",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/Resources/views/base.html.twig",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/modernizr/test/caniuse_files/ga.js",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/web/bundles/wwbstranslaciasite/components/angulartics/samples/google-analytics.html",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/app/cache/dev/sp_bower/bower.json",
-		"/home/beniwtv/Documents/CodeRepos/translacia.com/vendor/sp/bower-bundle/Sp/BowerBundle/composer.json"
+		"/home/beniwtv/Documents/CodeRepos/translacia.com/src/WWBS/Translacia/SiteBundle/Resources/views/Pages/angIndex.html.twig"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -690,6 +703,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"PASSWORD",
+			"delivery.",
+			"\",\n",
 			"create(",
 			"create",
 			"Geor",
@@ -802,25 +818,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 949,
+						"buffer_size": 1014,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								200,
-								200
+								564,
+								564
 							]
 						],
 						"settings":
 						{
 							"__vi_external_disable": true,
 							"draw_white_space": "none",
-							"git_repo": "/home/beniwtv/ownCloud/Projects/git-deployer",
+							"git_repo": "/home/beniwtv/Documents/CodeRepos/git-deployer",
 							"git_status": true,
 							"git_view": "status",
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
 							"translate_tabs_to_spaces": false,
 							"word_wrap": false

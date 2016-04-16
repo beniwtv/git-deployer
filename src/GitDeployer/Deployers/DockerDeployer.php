@@ -230,7 +230,7 @@ HELP;
 
         if (isset($config['environment'])) {
             foreach ($config['environment'] as $key => $value) {
-                $envArray[$key] = $value;
+                $envArray[] = $key . '=' . $value;
             }
         }
 
