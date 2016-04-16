@@ -6,3 +6,4 @@ bin/git-deployer.pubkey
 box.json
 private.key
 git-deployer.phar.pubkey
+git-deployer.sublime-workspace
