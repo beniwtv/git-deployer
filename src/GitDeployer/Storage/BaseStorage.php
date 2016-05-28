@@ -55,7 +55,7 @@ class BaseStorage {
      * Method to override in child services
      * @return boolean
      */
-    public function addNewDeploymentStatus(\GitDeployer\Objects\DeploymentStatus $status) {
+    public function addNewDeploymentStatus(\GitDeployer\Objects\Project $status) {
         throw new \Exception('You must override the addNewDeploymentStatus() method in your storage service!');
     }
 
