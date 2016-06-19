@@ -279,7 +279,7 @@ HELP
         $question->setValidator(function ($answer) {
             if (strlen($answer) < 4) {
                 throw new \RuntimeException(
-                    'The URL for the GitHub PI can not be empty!'
+                    'The URL for the GitHub API can not be empty!'
                 );
             }
 
