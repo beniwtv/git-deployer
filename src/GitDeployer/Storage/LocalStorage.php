@@ -32,7 +32,7 @@ class LocalStorage extends BaseStorage {
     public function setDeploymentStatus(\GitDeployer\Objects\Project $project, \GitDeployer\Objects\DeploymentStatus $status) {
 
         // -> Load status file, if not done so yet
-        $this->loadDeploymentStatuse();
+        $this->loadDeploymentStatuses();
 
         // -> Check if we already have a status object
         // that matches our project
@@ -64,7 +64,7 @@ class LocalStorage extends BaseStorage {
     public function getDeploymentStatus(\GitDeployer\Objects\Project $project) {
 
         // -> Load status file, if not done so yet
-        $this->loadDeploymentStatuse();
+        $this->loadDeploymentStatuses();
 
         // -> Check if we already have a status object
         // that matches our project
@@ -72,17 +72,16 @@ class LocalStorage extends BaseStorage {
 
         foreach ($this->deploymentStatuses as $status) {
             if ($status->project() == $project->name()) {
-                $currentStatusObject = $status;
+                return $status;
             }
         }
 
         // -> If we have no status object yet, return an empty one
-        if ($currentStatusObject == null) {
-            $status = new \GitDeployer\Objects\DeploymentStatus();
-            $status->project($project->name());
-        }
+        $status = new \GitDeployer\Objects\DeploymentStatus();
+        $status->project($project->name());
 
         return $status;
+
     }
 
     /**
@@ -120,7 +119,7 @@ class LocalStorage extends BaseStorage {
     public function removeDeploymentStatusForProject($project) {
 
         // -> Load status file, if not done so yet
-        $this->loadDeploymentStatuse();
+        $this->loadDeploymentStatuses();
 
         // -> Check if we already have a status object
         // that matches our project
@@ -189,7 +188,7 @@ class LocalStorage extends BaseStorage {
     /**
      * Loads the deployment status file, if not done so yet
      */
-    private function loadDeploymentStatuse() {
+    private function loadDeploymentStatuses() {
 
         if ($this->deploymentStatuses == null) {
             if ($statuses = @file_get_contents($this->path)) {

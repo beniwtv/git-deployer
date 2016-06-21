@@ -28,7 +28,7 @@ class StatusCommand extends Command {
         if ($storage == null) throw new \RuntimeException('Please configure Git-Deployer first!');
 
         $projects = $appService->getProjects();
-        
+
         // -> Print out status table
         $table = new Table($output);
         $table->setHeaders(array(
