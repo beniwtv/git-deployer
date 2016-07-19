@@ -44,7 +44,7 @@ class DockerDeployer extends BaseDeployer {
                 <comment>"key"</comment>:        The SSH private key file for authentication to the remote host (required)
                 <comment>"password"</comment>:   The password for the SSH private key file (optional, you will be asked for a password if needed)
 
- <comment>"ports"</comment>:        (array) Specifies the ports you want Docker to expose. If supports the complete Docker
+ <comment>"ports"</comment>:       (array) Specifies the ports you want Docker to expose. If supports the complete Docker
                 port description syntax, which is: [[hostIp:][hostPort]:]port[/protocol]. Examples:
 
                 80
@@ -56,7 +56,14 @@ class DockerDeployer extends BaseDeployer {
 
                 "dbtype": "mysql",
                 "dbuser": "user",
-                "dbpassword": "%dbpassword%" (placeholders supported)
+                "dbpassword": "%dbpassword%"    (placeholders supported)
+
+ <comment>"volumes"</comment>:     (array) Specifies the volumes that should be attached to the container when started. Examples:
+
+                "container_path"                (To create a new volume for the container)
+                "host_path:container_path"      (To bind-mount a host path into the container)
+                "host_path:container_path:ro"   (To make the bind-mount read-only inside the container)
+
 
 HELP;
 
@@ -267,6 +274,17 @@ HELP;
             if (isset($policy['MaximumRetryCount'])) $restartPolicy->setMaximumRetryCount($policy['MaximumRetryCount']);
 
             $hostConfig->setRestartPolicy($restartPolicy);
+        }
+
+        // Add binds
+        if (isset($config['volumes']) && is_array($config['volumes']) && count($config['volumes']) > 0) {
+            $binds = new \ArrayObject();
+
+            foreach ($config['volumes'] as $volume) {
+                $binds[] = $volume;
+            }
+
+            $hostConfig->setBinds($binds);
         }
 
         $containerConfig->setHostConfig($hostConfig);
