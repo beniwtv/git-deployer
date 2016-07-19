@@ -17,7 +17,7 @@ class DeployCommand extends Command {
         // -> Get arguments to command to see if we need to show
         // a deployer's help output
         $argv = $_SERVER['argv'];
-        if ($argv[1] == 'help' && isset($argv[2]) && $argv[2] == 'deploy' && isset($argv[3]) && strlen($argv[3]) > 0) {
+        if (isset($argv[1]) && $argv[1] == 'help' && isset($argv[2]) && $argv[2] == 'deploy' && isset($argv[3]) && strlen($argv[3]) > 0) {
             // Load a deployer that matches our name
             $className = '\GitDeployer\Deployers\\' . ucwords(strtolower($argv[3])) . 'Deployer';
             if (!class_exists($className)) throw new \Exception('The deployer with the name' . ucwords(strtolower($argv[3])) . ' was not found!');
