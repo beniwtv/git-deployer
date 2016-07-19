@@ -31,7 +31,7 @@ class DeployCommand extends Command {
  To use this command, you have to specify a valid <comment>repository</comment>, and a valid version string that tells Git-Deployer
  what exactly you want to deploy. This can be:
 
- - A <comment>tag</comment>, by specifying for example <info>tag:1.0></info>
+ - A <comment>tag</comment>, by specifying for example <info>tag:1.0</info>
  - A <comment>branch</comment>, by specifying for example <info>branch:bugfix-for-this</info>
  - A <comment>revision</comment>, by specifying for example <info>rev:c2356768</info>
  
