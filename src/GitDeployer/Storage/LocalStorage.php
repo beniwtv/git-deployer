@@ -68,8 +68,6 @@ class LocalStorage extends BaseStorage {
 
         // -> Check if we already have a status object
         // that matches our project
-        $currentStatusObject = null;
-
         foreach ($this->deploymentStatuses as $status) {
             if ($status->project() == $project->name()) {
                 return $status;

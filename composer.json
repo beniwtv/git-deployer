@@ -21,7 +21,7 @@
         "irc": "irc://irc.freenode.org/relamp.tk"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "GitDeployer": "src/" }
     },
     "require": {
         "php": ">=5.5",
