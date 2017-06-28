@@ -36,12 +36,32 @@ class AddCommand extends Command {
         // -> Get the current projects, and check if
         // the project exists and has not yet been added to
         // Git-Deployer  
-        $output->writeln('Adding new project <info>"' . $repository . '"</info>...');
-
         $hasBeenFound = false;
 
+        // -> Check if we have a namespace declaration too, in that
+        // case make sure we honor that
+        if (stristr($repository, '/')) {
+            $repoTmp    = explode('/', $repository);
+            $namespace  = trim($repoTmp[0]);
+            $repository = trim($repoTmp[1]);
+        } else {
+            $namespace  = null;
+        }
+
         foreach ($appService->getProjects() as $key => $project) {
-            if ($project->name() == $repository) {
+            if ($project->name() == $repository && $project->namespace() == $namespace) {
+                $output->writeln('Adding new project <info>"' . $repository . '"</info>...');
+
+                // -> Once we have our project, add it to the deployer projects
+                // This will fail if the project was already added
+                $storage->addNewDeploymentStatus($project);
+                $output->writeln('The project <info>"' . $repository . '"</info> was successfully added to Git-Deployer!');
+
+                $hasBeenFound = true;
+                break;
+            } elseif( $project->name() == $repository && $namespace == null ) {
+                $output->writeln('Adding new project <info>"' . $repository . '"</info>...');
+
                 // -> Once we have our project, add it to the deployer projects
                 // This will fail if the project was already added
                 $storage->addNewDeploymentStatus($project);

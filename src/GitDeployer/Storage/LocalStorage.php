@@ -39,7 +39,7 @@ class LocalStorage extends BaseStorage {
         $currentStatusObject = null;
 
         foreach ($this->deploymentStatuses as $key => $existingstatus) {
-            if ($status->project() == $project->name()) {
+            if ($status->project() == $project->name() && $status->namespace() == $project->namespace()) {
                 $currentStatusObject            = $status;
                 $this->deploymentStatuses[$key] = $status;
             }
@@ -69,14 +69,15 @@ class LocalStorage extends BaseStorage {
         // -> Check if we already have a status object
         // that matches our project
         foreach ($this->deploymentStatuses as $status) {
-            if ($status->project() == $project->name()) {
+            if ($status->project() == $project->name() && $status->namespace() == $project->namespace()) {
                 return $status;
             }
         }
 
         // -> If we have no status object yet, return an empty one
         $status = new \GitDeployer\Objects\DeploymentStatus();
-        $status->project($project->name());
+        $status->project($project->name())
+               ->namespace($project->namespace());
 
         return $status;
 
@@ -111,10 +112,10 @@ class LocalStorage extends BaseStorage {
      * Removes the deployment status for requested project, loads the
      * status file if not already done so, and rejects the request
      * if the project does not exist
-     * @param  string  $project The project to add 
+     * @param  \GitDeployer\Objects\Project $project The project to remove 
      * @return boolean
      */
-    public function removeDeploymentStatusForProject($project) {
+    public function removeDeploymentStatusForProject(\GitDeployer\Objects\Project $project) {
 
         // -> Load status file, if not done so yet
         $this->loadDeploymentStatuses();
@@ -124,14 +125,14 @@ class LocalStorage extends BaseStorage {
         $currentStatusObject = -1;
 
         foreach ($this->deploymentStatuses as $key => $status) {
-            if ($status->project() == $project) {
+            if ($status->project() == $project->name() && $status->namespace() == $project->namespace()) {
                 $currentStatusObject = $key;
             }
         }
 
         if ($currentStatusObject < 0) {
             // -> Project not found, inform user
-            throw new \Exception('Project "' . $project . '" is not present in Git-Deployer! Please check the status command!');    
+            throw new \Exception('Project "' . $project->name() . '" is not present in Git-Deployer! Please check the status command!');    
         } else {
             unset($this->deploymentStatuses[$currentStatusObject]);
             $this->deploymentStatuses = array_values($this->deploymentStatuses);

@@ -8,7 +8,14 @@ class DeploymentStatus extends BaseObject {
      * on the Git service
      * @var string
      */
-    protected $project;    
+    protected $project;
+
+     /**
+     * The project's namespace, as it appears
+     * on the Git service
+     * @var string
+     */
+    protected $namespace;    
 
     /**
      * Holds the IS0-8601 date of the

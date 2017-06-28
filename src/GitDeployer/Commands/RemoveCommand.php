@@ -34,14 +34,47 @@ class RemoveCommand extends Command {
         $storage = $instance->storage();       
 
         // -> Get the current projects, and check if
-        // the project exists and has not yet been added to
-        // Git-Deployer  
-        $output->writeln('Removing project <info>"' . $repository . '"</info>...');
+        // the project exists and has been added to
+        // Git-Deployer
+        $hasBeenFound = false;
 
-        // -> Once we have our project, add it to the deployer projects
-        // This will fail if the project does not exist
-        $storage->removeDeploymentStatusForProject($repository);
-        $output->writeln('The project <info>"' . $repository . '"</info> was successfully removed from Git-Deployer!');
+        // -> Check if we have a namespace declaration too, in that
+        // case make sure we honor that
+        if (stristr($repository, '/')) {
+            $repoTmp    = explode('/', $repository);
+            $namespace  = trim($repoTmp[0]);
+            $repository = trim($repoTmp[1]);
+        } else {
+            $namespace  = null;
+        }
+
+        foreach ($appService->getProjects() as $key => $project) {
+            if ($project->name() == $repository && $project->namespace() == $namespace) {
+                $output->writeln('Removing project <info>"' . $repository . '"</info>...');
+
+                // -> Once we have our project, add it to the deployer projects
+                // This will fail if the project does not exist
+                $storage->removeDeploymentStatusForProject($project);
+                $output->writeln('The project <info>"' . $repository . '"</info> was successfully removed from Git-Deployer!');
+
+                $hasBeenFound = true;
+                break;
+            } elseif( $project->name() == $repository && $namespace == null ) {
+                $output->writeln('Removing project <info>"' . $repository . '"</info>...');
+
+                // -> Once we have our project, add it to the deployer projects
+                // This will fail if the project does not exist
+                $storage->removeDeploymentStatusForProject($project);
+                $output->writeln('The project <info>"' . $repository . '"</info> was successfully removed from Git-Deployer!');
+
+                $hasBeenFound = true;
+                break;
+            }
+        }
+
+        if (!$hasBeenFound) {
+            throw new \Exception('Project "' . $repository . '" could not be found! Please check your spelling!');        
+        }   
 
     }
 

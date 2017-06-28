@@ -23,10 +23,16 @@ class DeployCommand extends Command {
             if (!class_exists($className)) throw new \Exception('The deployer with the name' . ucwords(strtolower($argv[3])) . ' was not found!');
 
             $helpText = $className::getHelp();
+        } elseif (isset($argv[1]) && $argv[1] == 'help' && isset($argv[2]) && $argv[2] == 'build' && isset($argv[3]) && strlen($argv[3]) > 0) {
+            // Load a builder that matches our name
+            $className = '\GitDeployer\Builders\\' . ucwords(strtolower($argv[3])) . 'Builder';
+            if (!class_exists($className)) throw new \Exception('The builder with the name' . ucwords(strtolower($argv[3])) . ' was not found!');
+
+            $helpText = $className::getHelp();
         } else {
             $helpText = <<<HELP
  The <info>%command.name%</info> command allows you to deploy a Git repository to a remote server.
- Please note that for this, your Git repository has to be added to Git-Deployer fist. Check the <info>add</info> command for help.
+ Please note that for this, your Git repository has to be added to Git-Deployer first. Check the <info>add</info> command for help.
 
  To use this command, you have to specify a valid <comment>repository</comment>, and a valid version string that tells Git-Deployer
  what exactly you want to deploy. This can be:
@@ -42,6 +48,7 @@ HELP;
 
         $this
             ->setName('deploy')
+            ->setAliases(array('build'))
             ->setDescription('Deploys a Git repository to a remote server')
             ->addArgument(
                 'repository',
@@ -72,11 +79,11 @@ HELP;
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         
-        $repository = $input->getArgument('repository');
-        $revision = $input->getArgument('revision');
-        $configuration = $input->getOption('configuration');
-        $bag = $input->getOption('bag');
-        $force = $input->getOption('force-redeploy');
+        $repository     = $input->getArgument('repository');
+        $revision       = $input->getArgument('revision');
+        $configuration  = $input->getOption('configuration');
+        $bag            = $input->getOption('bag');
+        $force          = $input->getOption('force-redeploy');
 
         // -> Check that the revision matches what we expect
         preg_match('#^(tag|branch|rev):(.*)#iu' , $revision, $matches);
@@ -98,68 +105,86 @@ HELP;
 
         $hasBeenFound = false;
 
+        // -> Check if we have a namespace declaration too, in that
+        // case make sure we honor that
+        if (stristr($repository, '/')) {
+            $repoTmp    = explode('/', $repository);
+            $namespace  = trim($repoTmp[0]);
+            $repository = trim($repoTmp[1]);
+        } else {
+            $namespace  = null;
+        }
+
         $this->showMessage('INIT', 'Getting repository...', $output);
 
         foreach ($appService->getProjects() as $key => $project) {
-            if ($project->name() == $repository) {                
+            if ($project->name() == $repository && $project->namespace() == $namespace) {                
                 $hasBeenFound   = true;
                 $status         = $storage->getDeploymentStatus($project);
-                
-                // -> Check if we have already been added to Git-Deployer yet
-                if (!$status->added()) {
-                    throw new \Exception('This repository is not yet added to Git-Deployer!' . "\n" . 'Please add it first via the add command.');        
-                }
+            } elseif( $project->name() == $repository && $namespace == null ) {
+                $hasBeenFound   = true;
+                $status         = $storage->getDeploymentStatus($project);
+            }
+        }
 
-                // -> Check we are not deploying the same version again. Ask
-                // if we do, so the user can decide 
-                if ($status->isDeployd()) {
-                    if ($status->getDeployedVersion() == $revision && !$force) {
-                        $helper     = $this->getHelper('question');
-                        $question   = new ConfirmationQuestion('Version ' . $status->getDeployedVersion() . ' was already deployed on ' . $status->deployedWhen() . '. Continue anyway? (y/[n]) ', false);
+        if ($hasBeenFound) {
+            // -> Check if we have already been added to Git-Deployer yet
+            if (!$status->added()) {
+                throw new \Exception('This repository is not yet added to Git-Deployer!' . "\n" . 'Please add it first via the add command.');        
+            }
 
-                        if (!$helper->ask($input, $output, $question)) {
-                            break;
-                        }
+            // -> Check we are not deploying the same version again. Ask
+            // if we do, so the user can decide
+            if ($status->isDeployd()) {
+                if ($status->getDeployedVersion() == $revision && !$force) {
+                    $helper     = $this->getHelper('question');
+                    $question   = new ConfirmationQuestion('Version ' . $status->getDeployedVersion() . ' was already deployed on ' . $status->deployedWhen() . '. Continue anyway? (y/[n]) ', false);
+
+                    if (!$helper->ask($input, $output, $question)) {
+                        throw new \Exception('Aborting, not deploying same version,' . "\n" . 'as per your request!');
                     }
-                }                               
+                }
+            }                               
                 
-                // -> Now clone it to a temp directory, if it doesn't exist already
-                $tmpDir = sys_get_temp_dir() . '/git-deploy-' . strtolower($project->name());
+            // -> Now clone it to a temp directory, if it doesn't exist already
+            $tmpDir = sys_get_temp_dir() . '/git-deploy-' . strtolower($project->name());
 
-                if (\Gitonomy\Git\Admin::isValidRepository($tmpDir)) {      
-                    $this->showMessage('GIT', 'Pulling latest changes from repository...', $output);
+            if (\Gitonomy\Git\Admin::isValidRepository($tmpDir)) {      
+                $this->showMessage('GIT', 'Pulling latest changes from repository...', $output);
 
-                    $repository = \Gitonomy\Git\Admin::init($tmpDir, false);
-                    $repository->run('pull');
-                } else {
-                    $this->showMessage('GIT', 'Cloning repository...', $output);
-                    $repository = \Gitonomy\Git\Admin::cloneTo($tmpDir, $project->url(), false);
-                }
+                $repository = \Gitonomy\Git\Admin::init($tmpDir, false);
+                $repository->run('pull');
+            } else {
+                $this->showMessage('GIT', 'Cloning repository...', $output);
+                $repository = \Gitonomy\Git\Admin::cloneTo($tmpDir, $project->url(), false);
+            }
 
-                // -> Check out the correct branch/revision/tag
-                $this->showMessage('GIT', 'Checking out ' . $revision . '...', $output);                
+            // -> Check out the correct branch/revision/tag
+            $this->showMessage('GIT', 'Checking out ' . $revision . '...', $output);                
                 
-                $wc = $repository->getWorkingCopy();
-                $wc->checkout($version);
+            $wc = $repository->getWorkingCopy();
+            $wc->checkout($version);
 
-                // -> Open .deployerfile and parse it
-                $this->showMessage('DEPLOY', 'Checking .deployerfile...', $output);
+            // -> Open .deployerfile and parse it
+            $this->showMessage('DEPLOY', 'Checking .deployerfile...', $output);
 
-                if (file_exists($tmpDir . '/.deployerfile')) {
-                    $deployerfile = json_decode(file_get_contents($tmpDir . '/.deployerfile'));
-                } else {
-                    throw new \Exception('This repository has no .deployerfile!' . "\n" . 'Please add one first!');
-                }
+            if (file_exists($tmpDir . '/.deployerfile')) {
+                $deployerfile = json_decode(file_get_contents($tmpDir . '/.deployerfile'));
+            } else {
+                throw new \Exception('This repository has no .deployerfile!' . "\n" . 'Please add one first!');
+            }
 
-                if ($deployerfile == null) {
-                    throw new \Exception('Could not parse .deployerfile: '. json_last_error_msg() . "\n" . 'Please check that your JSON is valid!');
-                }
+            if ($deployerfile == null) {
+                throw new \Exception('Could not parse .deployerfile: '. json_last_error_msg() . "\n" . 'Please check that your JSON is valid!');
+            }
 
-                // -> Load the correct deployer from the .deployerfile, and fire it up with
-                // the correct configuration options
-                if (!isset($deployerfile->type)) {
-                    throw new \Exception('Could not parse .deployerfile: ' . "\n" . 'Please specify a deployer via the "type" option!');
-                }
+            
+
+            // -> Load the correct deployer from the .deployerfile, and fire it up with
+            // the correct configuration options
+            if (!isset($deployerfile->type)) {
+                throw new \Exception('Could not parse .deployerfile: ' . "\n" . 'Please specify a deployer via the "type" option!');
+            }
 
                 if (!isset($deployerfile->configurations) || (isset($deployerfile->configurations) && !is_object($deployerfile->configurations))) {
                     throw new \Exception('Could not parse .deployerfile: ' . "\n" . 'Please specify at least one deployment configuration in the "configurations" option!');
@@ -351,23 +376,22 @@ HELP;
                 $deployer = \GitDeployer\Deployers\BaseDeployer::createServiceInstance(ucwords($deployerfile->type), $input, $output, $this->getHelperSet());
                 list($statusok, $trace) = $deployer->deploy($project, $tmpDir, $replacedConfig);
 
-                // -> Check if the deployment went well, return any errors,
-                // or update the deployment status for the project otherwise
-                if ($statusok) {
-                    $status->deployedWhen(date('c'));
-                    $status->deployedType($type);
-                    $status->deployedString($version);
+            // -> Check if the deployment went well, return any errors,
+            // or update the deployment status for the project otherwise
+            if ($statusok) {
+                $status->deployedWhen(date('c'));
+                $status->deployedType($type);
+                $status->deployedString($version);
 
-                    $storage->setDeploymentStatus($project, $status);
-                } else {
-                    $output->writeln($trace);
-                    throw new \Exception('Deployment did not completely finish! See trace above.');
-                }
-
-                // -> Finish up!
-                $this->showMessage('FINISH', '<info>Done!</info>', $output);
-                break;
+                $storage->setDeploymentStatus($project, $status);
+            } else {
+                $output->writeln($trace);
+                throw new \Exception('Deployment did not completely finish! See trace above.');
             }
+
+            // -> Finish up!
+            $this->showMessage('FINISH', '<info>Done!</info>', $output);
+            break;
         }
 
         if (!$hasBeenFound) {

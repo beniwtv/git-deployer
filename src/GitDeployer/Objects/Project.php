@@ -22,7 +22,7 @@ class Project extends BaseObject {
      * "user" of the project on the Git service
      * @var string
      */
-    protected $namespace;
+    protected $namespace = null;
 
     /**
      * The default branch of this Git repository

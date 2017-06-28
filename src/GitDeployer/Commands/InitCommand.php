@@ -9,7 +9,8 @@ class InitCommand extends Command {
     
     protected function configure() {
 
-        $deployers = \GitDeployer\Deployers\BaseDeployer::getDeployersForHelp();
+        $builders   = \GitDeployer\Builders\BaseBuilder::getBuildersForHelp();
+        $deployers  = \GitDeployer\Deployers\BaseDeployer::getDeployersForHelp();
 
         $this
             ->setName('init')
@@ -22,45 +23,74 @@ class InitCommand extends Command {
  A typical .deployerfile looks like this (remove comments, as they are not valid for JSON):
 
  {
-    # The deployers to use. This version of Git-Deployer supports the following deployers:
-    # <comment>$deployers</comment>
-    "type": "docker",
+    # The build section. This configures the builder used to build an artifact of your project, so that 
+    # it can then used by the deployer to deploy it to a server.
+    "build": {
+        # The builder to use. This version of Git-Deployer supports the following builders:
+        # <comment>$builders</comment>
+        "type": "docker",
 
-    # The configurations object is used to specify multiple configurations
-    "configurations": {
+        # The configurations object is used to specify multiple configurations
+        "configurations": {
+            << See description in "deploy" block below >>
+        }
 
-        # You can add an arbitrary number of configurations, with any names in this section
-        "production": {
+        # For overriding to be able to work, you need to specify an inheritance chain, like so:
+        inheritance": ["staging", "production"],
 
-            # Each deployer has it's own configuration options, specify them here. In our "docker"
-            # example, we could specify the DOCKER_HOST variable, for example
-            "host": "tcp://127.0.0.1:2375",
-
-            # In order to not save any passwords or private data into the .deployerfile, you can use
-            # parameter substitution. These parameters will be asked on deploy by Git-Deployer:
-            "supersecret": "%subsituteme%"
-        },
-        "staging": {
-
-            # You can override properties from other configurations
-            # example, we could specify the DOCKER_HOST variable, for example
-            "host": "tcp://192.168.0.1:2375"
+        # If you have any parameter substitutions, add them here with a description, so that
+        # the user deploying knows what to put in:
+        "parameters": {
+            "subsituteme": "Example param question description?"
         }
     },
 
-    # For overriding to be able to work, you need to specify an inheritance chain, like so:
-    inheritance": ["staging", "production"],
+    # The deploy section. This configures the deployer used to deploy the artifact created by the
+    # builder to a server.
+    "deploy": {
+        # The deployer to use. This version of Git-Deployer supports the following deployers:
+        # <comment>$deployers</comment>
+        "type": "docker",
 
-    # If you have any parameter substitutions, add them here with a description, so that
-    # the user deploying knows what to put in:
-    "parameters": {
-        "subsituteme": "Example param question description?"
-    }
+        # The configurations object is used to specify multiple configurations
+        "configurations": {
+
+            # You can add an arbitrary number of configurations, with any names in this section
+            "production": {
+
+                # Each deployer has it's own configuration options, specify them here. In our "docker"
+                # example, we could specify the DOCKER_HOST variable, for example
+                "host": "tcp://127.0.0.1:2375",
+
+                # In order to not save any passwords or private data into the .deployerfile, you can use
+                # parameter substitution. These parameters will be asked on deploy by Git-Deployer:
+                "supersecret": "%subsituteme%"
+            },
+            "staging": {
+
+                # You can override properties from other configurations
+                # example, we could specify the DOCKER_HOST variable, for example
+                "host": "tcp://192.168.0.1:2375"
+            }
+        },
+
+        # For overriding to be able to work, you need to specify an inheritance chain, like so:
+        inheritance": ["staging", "production"],
+
+        # If you have any parameter substitutions, add them here with a description, so that
+        # the user deploying knows what to put in:
+        "parameters": {
+            "subsituteme": "Example param question description?"
+        }
+    }       
  }
 
- For a list of configuration options for each deployer, you can use the deploy command help,
- for example, for the Docker deployer you would type:
+ For a list of configuration options for each builder and deployer, you can use the deploy command help,
+ for example, for the Docker builder you would type:
  <info>help deploy docker</info>
+
+ For the Docker deployer you would type:
+ <info>help build docker</info>
 
 HELP
             );

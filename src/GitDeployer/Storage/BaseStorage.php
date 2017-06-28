@@ -63,7 +63,7 @@ class BaseStorage {
      * Method to override in child services
      * @return boolean
      */
-    public function removeDeploymentStatusForProject($project) {
+    public function removeDeploymentStatusForProject(\GitDeployer\Objects\Project $project) {
          throw new \Exception('You must override the removeDeploymentStatusForProject() method in your storage service!');
     }
 
