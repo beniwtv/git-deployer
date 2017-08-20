@@ -71,7 +71,7 @@ class GogsService extends BaseService {
             try {
                 $response = $client->get($url);
                 $projects = json_decode($response->getBody());
-
+                
                 $projects = array_map( function ($p) {
                     $nametmp = explode('/', $p->full_name);
 
@@ -79,8 +79,10 @@ class GogsService extends BaseService {
                     $project->id($p->id)
                             ->name($nametmp[1])
                             ->namespace($nametmp[0])
+                            ->description($p->description)
                             ->url($p->clone_url)
-                            ->homepage($p->html_url);
+                            ->homepage($p->html_url)
+                            ->defaultBranch($p->default_branch);
 
                     return $project;
                 }, $projects);

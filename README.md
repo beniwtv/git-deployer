@@ -1,5 +1,6 @@
-[![Dependency Status](https://gemnasium.com/beniwtv/git-deployer.svg)](https://gemnasium.com/beniwtv/git-deployer)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0d9a4c7c-d2c4-422a-ac23-19353e6021a1/mini.png)](https://insight.sensiolabs.com/projects/0d9a4c7c-d2c4-422a-ac23-19353e6021a1)
+**DEPRECATION WARNING: AFTER A YEAR OF USING GIT-DEPLOYER, I SWITCHED TO A CONTINOUS INTEGRATION/BUILD SYSTEM VIA DOCKER/NOMAD/DRONE. AS SUCH,
+THIS PROJECT IS NO LONGER MAINTAINED.**
+
 [![License](https://img.shields.io/github/license/beniwtv/git-deployer.svg)](https://img.shields.io/github/license/beniwtv/git-deployer.svg)
 
 Git-Deployer
@@ -70,15 +71,15 @@ git-deployer logout
 3) Deployment with Git-Deployer
 --------------------------------
 
-Sometimes, it is useful to see the Git history before deploying. You can show the history
-of your Git repository with the history command:
+Sometimes, it is useful to see the Git history before deploying. You can show 
+the history of your Git repository with the history command:
 
 ```
 git-deployer history <projectname>
 ```
 
-To be able to deploy a Git repository with Git-Deployer, you must first add the project
-so that Git-Deployer is made aware of the new project:
+To be able to deploy a Git repository with Git-Deployer, you must first add the 
+project so that Git-Deployer is made aware of the new project:
 
 ```
 git-deployer add <projectname>
@@ -91,7 +92,8 @@ git-deployer remove <projectname>
 ```
 
 Next step is to create a .deployerfile in your repository, which will tell Git-Deployer
-how to deploy your project. For that, execute the init command in the root of your Git repository:
+how to deploy your project. For that, execute the init command in the root of your 
+Git repository:
 
 ```
 git-deployer init
@@ -118,16 +120,27 @@ git-deployer deploy <projectname> tag:v1.0.0 -c <configuration>
 
 Enjoy!
 
-4) About "Deployers"
---------------------
+4) About "Builders and "Deployers"
+----------------------------------
 
-Deployers are plugins for Git-Deployer that allow you to modify how a project is deployed
-to a server. The deployer to use can be set ona project by project basis, in the .deployerfile.
+**NOTE**: This is new as of Git-Deployer 1.0.0. Older .deployerfiles will need to 
+be upgraded to the new format - don't worry, it's largely the same though.
 
-To check which deployers have been integrated into your build of Git-Deployer, execute:
+Builders and deployers are plugins for Git-Deployer that allow you to modify how 
+a project is built and deployed to a server. The builder/deployer to use can be 
+set ona project by project basis, in the .deployerfile.
+
+To check which builders/deployers have been integrated into your build of 
+Git-Deployer, execute:
 
 ```
 git-deployer help init
+```
+
+To get help about a specific builder, execute:
+
+```
+git-deployer help build <builder>
 ```
 
 To get help about a specific deployer, execute:

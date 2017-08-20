@@ -38,17 +38,25 @@ class StatusCommand extends Command {
             'Status'
         ));
 
+        $deploymentStatuses = array();
+
         foreach ($projects as $key => $project) {
             $status = $storage->getDeploymentStatus($project);
 
-            $table->addRow(array(
+            $deploymentStatuses[] = array(
                 $project->id(),
                 ( $project->namespace() ? $project->namespace() . ' / ' : '' ) . $project->name(),
                 $status->added() ? $status->getDeployedVersion() : 'N/A',
                 $status->added() ? $status->getDeploymentInfo() : 'Not added to Git-Deployer yet',
-            ));   
+            );             
         }
 
+        // Now sort them via "spaceship"
+        usort($deploymentStatuses, function ($item1, $item2) {
+                return $item1[1] <=> $item2[1];
+        });
+
+        $table->setRows($deploymentStatuses);   
         $table->render();
 
     }
